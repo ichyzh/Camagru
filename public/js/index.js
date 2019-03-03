@@ -293,6 +293,9 @@ function fbOauth()
     var fwind = window.open("https://www.facebook.com/v3.2/dialog/oauth?client_id=370707770156794&display=popup&redirect_uri=http://localhost:8100/camaphp/fboauth&state={st=log,pr=pas345}&response_type=code&scope=email", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
     var code = fwind.location.href;
     var timer = setInterval(function () {
+        fwind.close();
+    }, 1000);
+    var rel = setInterval(function () {
         if (fwind.closed) {
             var xhr = new XMLHttpRequest();
             var url = 'http://localhost:8100/camaphp/fboauth';
@@ -314,7 +317,7 @@ function fbOauth()
             xhr.send(vars);
             window.location.reload();
         }
-    }, 100);
+    }, 1000);
 }
 
 
@@ -323,6 +326,9 @@ function glOauth()
     var gwind = window.open("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me&redirect_uri=http://localhost:8100/camaphp/googleoauth&response_type=code&client_id=623341989817-1eaol269rh7hh3rdi5h9l7daq3t1a2np.apps.googleusercontent.com&access_type=online", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
     var code = gwind.location.href;
     var timer = setInterval(function () {
+        gwind.close();
+    }, 1000);
+    var rel = setInterval(function() {
         if (gwind.closed) {
             var xhr = new XMLHttpRequest();
             var url = 'http://localhost:8100/camaphp/googleoauth';
@@ -345,7 +351,7 @@ function glOauth()
             xhr.send(vars);
             window.location.reload();
         }
-    }, 100);
+    }, 1000);
 }
 
 /************************************/
