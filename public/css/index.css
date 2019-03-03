@@ -1,0 +1,630 @@
+/*.row {
+  margin: 3rem;
+}*/
+
+body{
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    background-color: #F8F8FF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: #3cdd8c !important;
+    transition: .3s;
+}
+
+.nav-item:hover {
+    color: #3cdd8c;
+    transition: .3s;
+}
+
+.nav-link:hover {
+    cursor: pointer!important;
+}
+
+.navbar-light .navbar-brand {
+    color: #3cdd8c!important;
+}
+
+.nav-link:hover {
+    color: #3cdd8c;
+}
+
+p {
+    margin-bottom: 0;
+}
+button {
+    border-radius: 0!important;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+
+.accdrop {
+    font-size: 0.8rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    right: 0rem;
+    position: absolute;
+    background-color: rgb(248, 249, 250);
+    min-width: 130px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    /*z-index: 1;*/
+    margin-top: 3rem;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+
+.usrimgp {
+    width: 45px;
+    height: 45px;
+    -webkit-border-radius: 45px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 45px;
+    -moz-background-clip: padding;
+    border-radius: 45px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+
+.usrimgp:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/*register  -> login*/
+
+.auth-btn {
+    margin-bottom: 1rem;
+}
+
+.f-con {
+    height: 2rem;
+    border-radius: 0;
+}
+
+.regForm {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 100000 !important;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(100, 100, 100, 0.9);
+    /* Black w/ opacity */
+}
+
+.regForm-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    padding: 50px;
+}
+
+#logForm, #regForm, #resForm {
+    padding-top: 2rem;
+}
+
+.hide {
+    position: absolute;
+    top: -20px;
+    right: -1rem;
+    color: #ccc;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.hide:hover,
+.hide:focus {
+    color: #3cdd8c;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.social {
+    border-width: 0 thin 0 0;
+    border-style: solid;
+    padding-top: 2rem;
+}
+
+.soc-row {
+    margin-top: 4.5rem;
+}
+.soc-btn {
+    padding: 0.5rem;
+    border-radius: 0;
+    width: 140px;
+    font-size: 1.1rem;
+}
+
+.soc-icon {
+    border-right-style: solid;
+    border-width: thin;
+    padding-right: 1rem;
+    font-size: 1.3rem;
+    border-left: #80ffff;
+}
+.insta {
+    color: white;
+    background: #833ab4;
+}
+
+
+.hidden-form {
+    display: none;
+}
+
+.bt-hov {
+    background-image: linear-gradient(135deg, #f0ffff 0%, #80ffff 100%);
+    border: none;
+}
+.bt-hov:hover {
+    background-image: linear-gradient(135deg, #ccffff 0%, #00ffff 100%);
+    border: none;
+}
+
+.is_invalid {
+    border-width: thin!important;
+    border-style: solid!important;
+    border-color: red!important;
+}
+
+/*reg->log */
+
+
+
+.nav-mar {
+    margin-bottom: 4rem;
+}
+
+.navb {
+    padding-left: 0.6rem;
+}
+
+.right_col {
+    padding-right: 3.2rem;
+}
+
+.boxsize {
+    height: 10rem;
+    width: 20rem;
+}
+
+hr {
+    margin: 0.5rem 4rem;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(60, 221, 140, 0), rgba(60, 221, 140, 0.75), rgba(60, 221, 140, 0));
+}
+
+.comment {
+    margin-left: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+.comtext {
+    padding-top: 0.3rem;
+    padding-left: 0rem;
+}
+
+.marpic {
+    margin-right: -0.5rem!important
+}
+
+.bod {
+    background-color: #F5F5F5;
+    padding: 0;
+    margin: auto;
+}
+
+.name {
+    max-width: 500px;
+}
+
+.mySlides {
+    width: 1300px;
+}
+
+.img_p {
+    padding: 0;
+    margin: auto;
+}
+
+.modal-content {
+    background-color: transparent;
+    border: none!important;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 0!important;
+    outline: 0;
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.form-control {
+    margin-top: 5px!important;
+    margin-bottom: 5px!important;
+    border-color: transparent;
+}
+
+#myImg {
+    cursor: pointer;
+}
+
+#myImg:hover {
+    opacity: 0.7;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 100000 !important;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(100, 100, 100, 0.9);
+    /* Black w/ opacity */
+}
+
+.usrlog {
+    padding-left: 3.3rem;
+    padding-top: 0.8rem;
+    text-align: left;
+}
+
+.mask {
+    width: 45px;
+    height: 45px;
+    -webkit-border-radius: 45px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 45px;
+    -moz-background-clip: padding;
+    border-radius: 45px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+.mask-com {
+    width: 35px;
+    height: 35px;
+    -webkit-border-radius: 35px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 35px;
+    -moz-background-clip: padding;
+    border-radius: 35px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+
+.profile_img {
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 150px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 150px;
+    -moz-background-clip: padding;
+    border-radius: 150px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+
+.myImages {
+    height: 260px;
+}
+
+.usrimg {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 30px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 30px;
+    -moz-background-clip: padding;
+    border-radius: 30px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+
+.usrcap {
+    margin-right: 0.1rem;
+    margin-left: 0.1rem;
+    padding: 0.5rem;
+}
+
+.commentf {
+    text-align: left;
+    padding: 0rem;
+    margin: 0.7rem 0rem 0.7rem 0rem;
+    padding-left: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.leftcom {
+    padding-right: 0.5rem;
+    padding-left: 0rem;
+    margin-bottom: 1rem;
+}
+
+.leftcom .form-control {
+    border-radius: 0;
+}
+
+.leftbtn {
+    padding-left: 0;
+    padding-top: 2.4rem;
+}
+.leftbtn .btn {
+    min-width: 4rem;
+    background-color: #67e4a6;
+    border: none;
+}
+
+.leftbtn .btn:hover {
+    background-image: linear-gradient(135deg, #e9fbf2 0%, #67e4a6 100%);
+    border: none;
+}
+
+.leftcompic {
+    padding-top: 0.8rem;
+    padding-left: 1.5rem;
+}
+
+.usrname {
+    margin-bottom: 0.3rem;
+    margin-top: 0.4rem;
+    margin-left: 1.2rem;
+    font-weight: 800;
+    font-size: 0.8rem;
+    width: 6rem;
+}
+
+.user-field {
+    padding: 0;
+    margin: 0.1rem;
+}
+
+.usr-border {
+    /*  border-radius: 5px;*/
+    background-color: white;
+}
+
+.usrblock {
+    margin: 0;
+    padding: 0.2rem;
+}
+
+.usrphoto {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    border-top-left-radius: 5px;
+}
+
+.like {
+    background-color: transparent;
+    padding: 0;
+}
+
+.liked {
+    color: #3cdd8c;
+}
+
+.io_size {
+    font-size: 1.2rem;
+    padding: 0.3rem;
+}
+.io_size:hover {
+    color: #3cdd8c;
+}
+
+.num_likes {
+    margin-left: 0.2rem;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    font-size: 0.8rem!important;
+}
+
+.num_likes_mod {
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+.pad-ico {
+    padding-left: 2rem!important;
+}
+
+.modal-content{
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+.close {
+    position: absolute;
+    right: 1px;
+    color: #ccc;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #3cdd8c!important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 10%;
+    width: auto;
+    padding: 50px;
+    padding-top: 180px;
+    padding-bottom: 150px;
+    margin-top: -50px;
+    color: #ccc!important;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border: none!important;
+}
+
+.next {
+    right: 0;
+    /*border-radius: 3px 0 0 3px;*/
+}
+.prev {
+    left: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    color: #3cdd8c!important;
+}
+
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .myImages {
+        height: 200px;
+    }
+}
+
+/*profile */
+
+.align-middle {
+    margin: auto 0 auto 0;
+}
+
+.profile-btn {
+    display: block;
+    margin: 0.3rem;
+}
+
+.profile_login {
+    font-size: 3rem;
+}
+
+.hidden {
+    display: none!important;
+}
+
+.change_btn {
+    display: inline-block;
+}
+
+#delete_acc:hover {
+    color: red;
+}
+
+#button_row .nav-link {
+    padding-left: 0;
+}
+
+.button-change {
+    width: 100%;
+    background-color: #3cdd8c;
+    opacity: 0.7;
+}
+
+.button-change:hover {
+    opacity: 1;
+}
+
+.delete_photo {
+    color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.delete_photo:hover,
+.delete_photo:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.set_profile {
+    background-color: transparent;
+    opacity: 0.7;
+}
+
+.set_profile:hover {
+    opacity: 1;
+    color: #3cdd8c;
+}
+
+

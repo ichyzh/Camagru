@@ -1,0 +1,24 @@
+.resForm {
+    width: 90%;
+    padding: 30px;
+}
+
+.reset-footer {
+    position: fixed!important;
+}
+
+.res-con {
+    padding: 0;
+    height: 2rem;
+    border-radius: 0;
+}
+
+.m-btn {
+    margin-top: 1rem;
+}
+
+.res-lable {
+    padding-top: 0.6rem;
+    margin-bottom: 0;
+    padding-right: 0;
+}
