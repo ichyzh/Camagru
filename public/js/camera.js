@@ -61,21 +61,31 @@ file_photo.onchange = function (evt) {
     save_photo.classList.remove("hide");
     var tgt = evt.target || window.event.srcElement,
         files = tgt.files;
-    // FileReader support
     if (FileReader && files && files.length) {
         var fr = new FileReader();
         fr.onload = function () {
-            carous.classList.remove("hide");
-            var elem = document.createElement('img');
-            elem.src = fr.result;
-            elem.classList.add("back");
-            here.appendChild(elem);
-            console.dir(fr.result);
-            video.classList.add("hide");
+            var data = fr.result.split(':');
+            var res = data[1].split(';');
+            var type = res[0].split('/');
+            console.log(type[0]);
+            if (type[0] === "image") {
+                carous.classList.remove("hide");
+                var elem = document.createElement('img');
+                elem.src = fr.result;
+                elem.classList.add("back");
+                here.appendChild(elem);
+                video.classList.add("hide");
+            }
+            else {
+                alert("Please select a valid image");
+                upload_photo.classList.remove("hide");
+                snap.classList.remove("hide");
+                new_photo.classList.add("hide");
+                save_photo.classList.add("hide");
+            }
         };
         fr.readAsDataURL(files[0]);
     }
-
     // Not supported
     else {
         // fallback -- perhaps submit the input to an iframe and temporarily store
@@ -83,7 +93,6 @@ file_photo.onchange = function (evt) {
     }
 };
 
-// Trigger photo take
 snap.addEventListener("click", function() {
     carous.classList.remove("hide");
     while( here.hasChildNodes() ){

@@ -30,6 +30,20 @@
             </div>
         </div>
         <?php endforeach; ?>
+    </div>
+    <?php if($pag['number_of_pages'] > 0): ?>
+        <div class="row pagin">
+            <nav aria-label="..." class="m-auto">
+                <ul class="pagination pagination-lg">
+                    <?php for($i = 0; $i < $pag['number_of_pages']; $i++): ?>
+                        <li class="page-item">
+                            <a class="page-link pag-link" href="/<?php echo ROOT ?>?page=<?php echo $i+1 ?>" tabindex="-1"><?php echo $i+1 ?></a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+        </div>
+    <?php endif; ?>
         <!--reg-->
         <div id="regModal" class="regForm">
             <div class="modal-content"">
@@ -116,8 +130,6 @@
                 </form>
             </div>
         </div>
-    </div>
-
 </div>
 <!--reg-->
 

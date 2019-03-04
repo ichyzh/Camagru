@@ -21,8 +21,13 @@ class ProfileController extends Controller
         $logged['this_user'] = false;
         $user = User::getCurrentUser();
         $logged['is_logged'] = User::checkCookies($_COOKIE);
+        $notif = User::checkNotif($user['id']);
+        $logged['checked'] = $notif;
         $login = $this->route['profile'];
         $id = User::getUser($login);
+        if (!$id) {
+            View::errorCode(404);
+        }
         if (isset($user['id']) && strcmp($user['id'], $id) === 0) {
             $logged['this_user'] = true;
         }

@@ -34,11 +34,9 @@ function openModal() {
     document.getElementById('myModal').style.display = "block";
 }
 
-var span = document.getElementsByClassName("close")[0];
-
-span.onclick = function() {
+function span() {
     modal.style.display = "none";
-};
+}
 
 window.onclick = function(event) {
     var cont = document.getElementById('drop_cont');
@@ -221,49 +219,42 @@ function addComment(result, photo_id) {
 /************************************/
 /************************************/
 
-var change_login = document.getElementById("change_login");
-var change_pwd = document.getElementById("change_pwd");
-var change_email = document.getElementById("change_email");
 var notifications = document.getElementById("disable_notif");
-var delete_acc = document.getElementById("delete_acc");
 var form_login = document.getElementById("form-login-change");
 var form_pw = document.getElementById("form-pw-change");
 var form_email = document.getElementById("form-email-change");
-var send_login = document.getElementById("send-login");
-var send_pw = document.getElementById("send-pw");
-var send_email = document.getElementById("send-email");
 var checkbox = document.getElementById("checkbox");
 var delete_photo = document.querySelectorAll(".delete_photo");
 var set_as_profile = document.querySelectorAll(".set_profile");
 
-change_login.onclick = function () {
+function change_login () {
     if (form_login.classList.contains("hidden")) {
         form_login.classList.remove("hidden");
     }
     else {
         form_login.classList.add("hidden");
     }
-};
+}
 
-change_email.onclick = function () {
+function change_email () {
     if (form_email.classList.contains("hidden")) {
         form_email.classList.remove("hidden");
     }
     else {
         form_email.classList.add("hidden");
     }
-};
+}
 
-change_pwd.onclick = function () {
+function change_pwd () {
     if (form_pw.classList.contains("hidden")) {
         form_pw.classList.remove("hidden");
     }
     else {
         form_pw.classList.add("hidden");
     }
-};
+}
 
-send_login.onclick = function () {
+function send_login () {
     var new_login = form_login.children[0].value;
     if (new_login !== "") {
         var xhr = new XMLHttpRequest();
@@ -287,9 +278,9 @@ send_login.onclick = function () {
     else {
         console.log("LOH");
     }
-};
+}
 
-send_pw.onclick = function () {
+function send_pwd () {
     var oldpw = form_pw.children[0].value;
     var newpw = form_pw.children[1].value;
     var reppw = form_pw.children[2].value;
@@ -312,12 +303,9 @@ send_pw.onclick = function () {
         };
         xhr.send(vars);
     }
-    console.dir(form_pw.children[0].value);
-    console.dir(form_pw.children[1].value);
-    console.dir(form_pw.children[2].value);
-};
+}
 
-send_email.onclick = function () {
+function send_email () {
     var new_email = form_email.children[0].value;
     if (new_email !== "") {
         var xhr = new XMLHttpRequest();
@@ -338,13 +326,12 @@ send_email.onclick = function () {
         };
         xhr.send(vars);
     }
-    console.dir(form_email.children[0].value);
-};
+}
 
-delete_acc.onclick = function () {
+function delete_acc(e) {
     var result = confirm("Are you sure?");
     if (result) {
-        var id = delete_acc.title;
+        var id = e.title;
         var xhr = new XMLHttpRequest();
         var url = 'http://localhost:8100/camaphp/delete_acc';
         var vars = "submit=OK" + "&id=" + id;
@@ -356,6 +343,9 @@ delete_acc.onclick = function () {
                 if (xhr.responseText) {
                     console.log(xhr.responseText);
                     var result = JSON.parse(xhr.responseText);
+                    if (result.resp) {
+                        window.location.href = result.resp;
+                    }
                 }
                 else
                     console.log("7777777");
@@ -365,7 +355,7 @@ delete_acc.onclick = function () {
     }
 };
 
-notifications.onclick = function () {
+function disable_notif() {
     var xhr = new XMLHttpRequest();
     var url = 'http://localhost:8100/camaphp/disable_notification';
     var vars = "submit=OK";
@@ -405,7 +395,7 @@ delete_photo.forEach(function (e) {
            xhr.onreadystatechange = function () {
                if (xhr.readyState === 4 && xhr.status === 200) {
                    if (xhr.responseText) {
-                       console.log(xhr.responseText);
+                       window.location.reload(false);
                        var result = JSON.parse(xhr.responseText);
                    }
                    else
@@ -429,7 +419,6 @@ function change_picture(e) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 if (xhr.responseText) {
-                    console.log(xhr.responseText);
                     var result = JSON.parse(xhr.responseText);
                 }
                 else

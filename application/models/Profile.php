@@ -21,6 +21,7 @@ class Profile
         $usr_img = $res['usr_img'];
         $sql = "SELECT * FROM `photos` WHERE `user_id`='{$id}'";
         $res = $dbh->all($sql);
+        $current_user_id = User::getCurrentUser();
         if (empty($res)) {
             $res['empty'] = true;
             $res[0]['login'] = $login;
@@ -29,7 +30,7 @@ class Profile
             foreach ($res as $k => $v) {
                 $res[$k]['login'] = $login;
                 $res[$k]['usr_img'] = $usr_img;
-                $sql = "SELECT * FROM `likes` WHERE `user_id` = '{$id}' AND `photo_id` = '{$v['id']}'";
+                $sql = "SELECT * FROM `likes` WHERE `user_id` = '{$current_user_id['id']}' AND `photo_id` = '{$v['id']}'";
                 $result = $dbh->dbQuery($sql);
                 if ($result->rowCount() > 0) {
                     $res[$k]['liked'] = true;

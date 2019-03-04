@@ -19,38 +19,38 @@
     <?php if($logged['this_user']): ?>
     <div class="row justify-content-center" id="button_row">
         <div class="col-2">
-            <p class="nav-link change_btn" id="change_login">Change Login</p>
+            <p class="nav-link change_btn" id="change_login" onclick="change_login();">Change Login</p>
             <form id="form-login-change" class="hidden" onsubmit="return false;">
                 <input type="login" class="form-control f-con" id="login" placeholder="New Login">
-                <button class="btn btn-sm button-change" value="Send" id="send-login">Send</button>
+                <button class="btn btn-sm button-change" value="Send" id="send-login" onclick="send_login();">Send</button>
             </form>
         </div>
         <div class="col-2">
-            <p class="nav-link change_btn" id="change_pwd">Change Password</p>
+            <p class="nav-link change_btn" id="change_pwd" onclick="change_pwd();">Change Password</p>
             <form id="form-pw-change" class="hidden" onsubmit="return false;">
                 <input type="password" class="form-control f-con" id="oldpassword" placeholder="Old Password">
                 <input type="password" class="form-control f-con" id="newpassword" placeholder="New Password">
                 <input type="password" class="form-control f-con" id="repeatpassword" placeholder="New Password">
-                <button class="btn btn-sm button-change" id="send-pw">Send</button>
+                <button class="btn btn-sm button-change" id="send-pw" onclick="send_pwd();">Send</button>
             </form>
         </div>
         <div class="col-2">
-            <p class="nav-link change_btn" id="change_email">Change E-mail</p>
+            <p class="nav-link change_btn" id="change_email" onclick="change_email();">Change E-mail</p>
             <form id="form-email-change" class="hidden" onsubmit="return false;">
                 <input type="email" class="form-control f-con" id="email" placeholder="Enter email">
-                <button class="btn btn-sm button-change" id="send-email">Send</button>
+                <button class="btn btn-sm button-change" id="send-email" onclick="send_email();">Send</button>
             </form>
         </div>
         <?php endif; ?>
         <?php if($logged['this_user'] || $logged['adm']): ?>
         <div class="col-2">
-            <p class="nav-link change_btn" id="delete_acc" title="<?php echo $logged['del_id'] ?>" >Delete account</p>
+            <p class="nav-link change_btn" id="delete_acc" title="<?php echo $logged['del_id'] ?> " onclick="delete_acc(this);" >Delete account</p>
         </div>
         <?php endif; ?>
         <?php if($logged['this_user']): ?>
         <div class="col-2">
-            <input class="mr-1" id="checkbox" type="checkbox" name="news" value="ON" checked>
-            <p class="nav-link change_btn" id="disable_notif">Notifications</p>
+            <input class="mr-1" id="checkbox" type="checkbox" name="news" value="ON" <?php echo $logged['checked'] ?>>
+            <p class="nav-link change_btn" id="disable_notif" onclick="disable_notif();">Notifications</p>
         </div>
     </div>
     <hr>
@@ -86,10 +86,11 @@
         </div>
         <?php endforeach; ?>
         <?php endif; ?>
+        <?php if (!isset($vars['empty'])): ?>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <div class="row justify-content-center">
-                    <span class="close">&times;</span>
+                    <span class="close" onclick="span();">&times;</span>
                     <?php foreach ($vars as $key => $val): ?>
                         <div class="mySlides" >
                             <div class="col-9 img_p">
@@ -100,33 +101,48 @@
                             <div class="col-9 bod">
                                 <div id="caption">
                                     <div class="row border-bottom usrcap">
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <a href="http://localhost:8100/<?php echo ROOT . "/profile/" . $val['login'] ?>" title="username">
                                                 <div class="mask" style="background-image: url(<?php echo "/" . ROOT . "/" . $val['usr_img'] ?>);">
                                                 </div>
                                                 <p class="usrlog w-100"><?php echo $val['login'] ?></p>
                                             </a>
                                         </div>
-                                        <?php if($logged['this_user']): ?>
-                                        <div class="col-4 m-auto">
-                                            <button class="btn set_profile" id="<?php echo $val['id'] ?>" onclick="change_picture(this);">Set as profile picture</button>
-                                        </div>
-                                        <?php endif; ?>
-                                        <div class="col-4">
-                                            <div class="row float-right">
-                                                <?php if ($val['liked']): ?>
-                                                    <?php echo "<div class=\"col-5 text-right\">" ?>
-                                                    <?php echo "<button class='btn like liked' id='like' value=" . $val['id'] . "><i class='far fa-heart pr-1 io_size' style='font-size: 2rem' ><p class='num_likes_mod'>" . $val['likes_count'] . "</p></i></button>" ?>
-                                                    <?php echo "</div>" ?>
-                                                <?php else: ?>
-                                                    <?php echo "<div class=\"col-5 text-right\">" ?>
-                                                    <?php echo "<button class='btn like' id='like' value=" . $val['id'] . "><i class='far fa-heart pr-1 io_size' style='font-size: 2rem' ><p class='num_likes_mod'>" . $val['likes_count'] . "</p></i></button>" ?>
-                                                    <?php echo "</div>" ?>
-                                                <?php endif; ?>
-                                                <div class="col-5 text-right">
-                                                    <button class="btn like"><span style="font-size: 1rem"><i class="far fa-comment-alt io_size" style="font-size: 2rem"></i><?php echo $val['comments_count'] ?></span></button>
+                                        <div class="col-9">
+                                            <?php if($logged['this_user']): ?>
+                                                <div class="row">
+                                                    <div class="col-6 m-auto">
+                                                        <button class="btn set_profile" id="<?php echo $val['id'] ?>" onclick="change_picture(this);">Set as profile picture</button>
+                                                    </div>
+                                                    <?php if ($val['liked']): ?>
+                                                        <?php echo "<div class=\"col-3 text-right\">" ?>
+                                                        <?php echo "<button class='btn like liked' id='like' value=" . $val['id'] . "><i class='far fa-heart pr-1 io_size' style='font-size: 2rem' ><p class='num_likes_mod'>" . $val['likes_count'] . "</p></i></button>" ?>
+                                                        <?php echo "</div>" ?>
+                                                    <?php else: ?>
+                                                        <?php echo "<div class=\"col-3 text-right\">" ?>
+                                                        <?php echo "<button class='btn like' id='like' value=" . $val['id'] . "><i class='far fa-heart pr-1 io_size' style='font-size: 2rem' ><p class='num_likes_mod'>" . $val['likes_count'] . "</p></i></button>" ?>
+                                                        <?php echo "</div>" ?>
+                                                    <?php endif; ?>
+                                                    <div class="col-2 text-right">
+                                                        <button class="btn like"><span style="font-size: 1rem"><i class="far fa-comment-alt io_size" style="font-size: 2rem"></i><?php echo $val['comments_count'] ?></span></button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php else: ?>
+                                                <div class="row float-right">
+                                                    <?php if ($val['liked']): ?>
+                                                        <?php echo "<div class=\"col-6 \">" ?>
+                                                        <?php echo "<button class='btn like liked' id='like' value=" . $val['id'] . "><i class='far fa-heart pr-1 io_size' style='font-size: 2rem' ><p class='num_likes_mod'>" . $val['likes_count'] . "</p></i></button>" ?>
+                                                        <?php echo "</div>" ?>
+                                                    <?php else: ?>
+                                                        <?php echo "<div class=\"col-6 \">" ?>
+                                                        <?php echo "<button class='btn like' id='like' value=" . $val['id'] . "><i class='far fa-heart pr-1 io_size' style='font-size: 2rem' ><p class='num_likes_mod'>" . $val['likes_count'] . "</p></i></button>" ?>
+                                                        <?php echo "</div>" ?>
+                                                    <?php endif; ?>
+                                                    <div class="col-2 text-right">
+                                                        <button class="btn like"><span style="font-size: 1rem"><i class="far fa-comment-alt io_size" style="font-size: 2rem"></i><?php echo $val['comments_count'] ?></span></button>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +167,7 @@
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </div>
-                                <?php if(\application\models\User::checkCookies($_COOKIE)): ?>
+                                <?php if($logged['is_logged']): ?>
                                     <div class="row ml-3 mb-1 mr-3 mt-1">
                                         <div class="row m-0 marpic">
                                             <div class="col-2 leftcompic">
@@ -175,6 +191,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </div>
 <script type="text/javascript" src="<?php echo "/" . ROOT . "/" ."public/js/profile.js"; ?>"></script>

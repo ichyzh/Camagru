@@ -150,7 +150,7 @@ class UserController extends Controller
         }
     }
 
-    public function actiondeleteAcc() {
+    public function actionDeleteAcc() {
         if (!isset($_POST['submit']) || !isset($_POST['id'])) {
             View::errorCode(403);
         } else {
@@ -163,6 +163,7 @@ class UserController extends Controller
             View::errorCode(403);
         } else {
             User::deletePhoto($_POST['phid']);
+            echo json_encode("ok");
         }
     }
 

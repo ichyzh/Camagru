@@ -19,9 +19,10 @@ class MainController extends Controller
 {
     public function actionIndex()
     {
+        $pagination = Main::pagination();
         $logged['is_logged'] = User::checkCookies($_COOKIE);
         $id = User::getCurrentUser();
-        $res = Main::getPhotos($id['id']);
-        $this->view->render('Camagru', $logged, $res);
+        $res = Main::getPhotos($id['id'], $pagination);
+        $this->view->render('Camagru', $logged, $res, $pagination);
     }
 }

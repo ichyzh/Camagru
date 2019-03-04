@@ -320,8 +320,6 @@ class User
                 $data = static::GetGoogleAccessToken(GCLIENT_ID, GCLIENT_REDIRECT_URL, GCLIENT_SECRET, $_GET['code']);
                 $user_info = static::GetGoogleUserProfileInfo($data['access_token']);
 
-                echo '<pre>';var_dump($user_info); echo '</pre>';
-
                 $email = $user_info['emails'][0]['value'];
                 $login = lcfirst($user_info['name']['familyName']) . "_" . lcfirst($user_info['name']['givenName']);
                 if ($user_info['image']['isDefault']) {
@@ -434,10 +432,10 @@ class User
         if (!empty($errors)) {
             return false;
         }
-        if ($id) {
+        if ($id['id']) {
             $dbh = new Db();
             $params = [
-                "id" => $id,
+                "id" => $id['id'],
                 "new_login" => $new_login
             ];
             $sql = "UPDATE `users` SET `login` = :new_login WHERE `id`= :id";
@@ -453,7 +451,7 @@ class User
         if (!$id) {
             return false;
         }
-        $sql = "SELECT `login` FROM `users` WHERE `id`= '{$id}'";
+        $sql = "SELECT `login` FROM `users` WHERE `id`= '{$id['id']}'";
         $dbh = new Db();
         $res = $dbh->row($sql);
         $login = $res['login'];
@@ -468,7 +466,7 @@ class User
         $sql = "UPDATE `users` SET `passwd`= :pwd WHERE `id` = :id";
         $params = [
             "pwd" => $pas,
-            "id" => $id
+            "id" => $id['id']
         ];
         $dbh->dbQuery($sql, $params);
         return true;
@@ -487,7 +485,7 @@ class User
         $dbh = new Db();
         $sql = "UPDATE `users` SET `email` = :new_email WHERE `id`= :id";
         $params = [
-            "id" => $id,
+            "id" => $id['id'],
             "new_email" => $new_email
         ];
         $dbh->dbQuery($sql, $params);
@@ -500,14 +498,14 @@ class User
         if(!$id) {
             return false;
         }
-        $sql = "SELECT `notif` FROM `users` WHERE `id`='{$id}'";
+        $sql = "SELECT `notif` FROM `users` WHERE `id`='{$id['id']}'";
         $res = $dbh->row($sql);
         if ($res['notif'] === "1") {
-            $sql = "UPDATE `users` SET `notif`='0'";
+            $sql = "UPDATE `users` SET `notif`='0' WHERE `id`='{$id['id']}'";
             $dbh->dbQuery($sql);
         }
         elseif ($res['notif'] === "0") {
-            $sql = "UPDATE `users` SET `notif`='1'";
+            $sql = "UPDATE `users` SET `notif`='1' WHERE `id`='{$id['id']}'";
             $dbh->dbQuery($sql);
         }
     }
@@ -518,27 +516,29 @@ class User
             return false;
         }
         $dbh = new Db();
-        $sql = "SELECT * FROM `photos` WHERE `user_id`='{$id}'";
-        $res = $dbh->all($sql);
-        foreach ($res as $key => $val) {
-            $dbh->delete("likes", "photo_id", $val['id']);
-            $dbh->delete("comments", "photo_id", $val['id']);
+        $sql = "SELECT `adm` FROM `users` WHERE `id`='{$current_id['id']}'";
+        $res = $dbh->row($sql);
+        if (strcmp($current_id['id'], $id) || $res['adm'] == 1) {
+            $sql = "SELECT * FROM `photos` WHERE `user_id`='{$id}'";
+            $res = $dbh->all($sql);
+            foreach ($res as $key => $val) {
+                $dbh->delete("likes", "photo_id", $val['id']);
+                $dbh->delete("comments", "photo_id", $val['id']);
+            }
+            $dbh->delete("users", "id", $id);
+            $dbh->delete("photos", "user_id", $id);
+            $dbh->delete("likes", "user_id", $id);
+            $dbh->delete("comments", "user_id", $id);
+            $url = "http://localhost:8100/" . ROOT;
+            echo json_encode(["resp" => $url]);
         }
-        $dbh->delete("users", "id", $id);
-        $dbh->delete("photos", "user_id", $id);
-        $dbh->delete("likes", "user_id", $id);
-        $dbh->delete("comments", "user_id", $id);
-        if ($current_id == $id) {
-            User::logout();
-        } else {
-            header("Location: /");
-        }
-
-
     }
 
     public static function deletePhoto($id) {
         $dbh = new Db();
+        $sql = "SELECT `src` FROM `photos` WHERE `id`='{$id}'";
+        $src = $dbh->row($sql);
+        unlink($src['src']);
         $dbh->delete("photos", "id", $id);
         $dbh->delete("likes", "photo_id", $id);
         $dbh->delete("comments", "photo_id", $id);
@@ -563,6 +563,17 @@ class User
         $dbh->dbQuery($sql);
         setcookie("avatar", "", time()-3600);
         setcookie("avatar", $src['src'], time()+86400);
+    }
+
+    public static function checkNotif($id) {
+        $dbh = new Db();
+        $sql = "SELECT `notif` FROM `users` WHERE `id`='{$id}'";
+        $res = $dbh->row($sql);
+        if ($res['notif'] == 1) {
+            return "checked";
+        } else {
+            return "";
+        }
     }
 
 }

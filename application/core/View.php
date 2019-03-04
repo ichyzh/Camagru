@@ -24,7 +24,7 @@ class View
         $this->path = $route['controller'] . '/' . $route['action'];
     }
 
-    public function render($title, $logged, $vars = [])
+    public function render($title, $logged, $vars = [], $pag = [])
     {
 //        $current_id = User::getCurrentUser();
         $file = 'application/views/' . $this->path . '.php';

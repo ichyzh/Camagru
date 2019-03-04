@@ -73,5 +73,5 @@
     </div>
 </div>
 <canvas id="canvas" width="640" height="480" style="display:none"></canvas>
-<script src="public/js/camera.js"></script>
-<link rel="stylesheet" href="public/css/camera.css">
+<script src="/<?php echo ROOT ?>/public/js/camera.js"></script>
+<link rel="stylesheet" href="/<?php echo ROOT ?>/public/css/camera.css">
