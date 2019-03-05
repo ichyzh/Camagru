@@ -33,7 +33,7 @@ function registration() {
     logForm.classList.add('hidden-form');
     resForm.classList.add('hidden-form');
     regForm.classList.remove('hidden-form');
-};
+}
 
 notReg.onclick = function(evt) {
     regModal.style.display = "block";
@@ -106,7 +106,6 @@ function plusSlides(n) {
 
 // Thumbnail image controls
 function currentSlide(n) {
-    console.log(n);
     showSlides(slideIndex = n);
 }
 

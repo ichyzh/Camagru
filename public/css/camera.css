@@ -173,3 +173,34 @@ h1 {
 #photos_prev {
     display: flex;
 }
+
+@media screen and (max-width: 1200px) {
+    .main .row {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 505px) {
+    .prev, .next {
+        padding: 5px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .num_likes_mod {
+        font-size: 1rem;
+    }
+
+    #under_buttons {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .change_btn {
+        display: block;
+    }
+
+    .leftbtn .btn {
+        min-width: 1rem;
+    }
+}

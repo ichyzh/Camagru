@@ -28,14 +28,15 @@ class ProfileController extends Controller
         if (!$id) {
             View::errorCode(404);
         }
+        $pagination = Profile::pagination($id);
         if (isset($user['id']) && strcmp($user['id'], $id) === 0) {
             $logged['this_user'] = true;
         }
         if (isset($user['id']) && isset($user['adm'])) {
             $logged['del_id'] = $id;
             $logged['adm'] = $user['adm'];
-            $res = Profile::getUserPhotos($id);
-            $this->view->render("Profile",$logged, $res);
+            $res = Profile::getUserPhotos($id, $pagination);
+            $this->view->render("Profile",$logged, $res, $pagination);
         } else {
             View::errorCode(404);
         }

@@ -373,13 +373,7 @@ function disable_notif() {
         }
     };
     xhr.send(vars);
-    if (!checkbox.checked) {
-        checkbox.checked = true;
-    }
-    else {
-        checkbox.checked = false;
-    }
-};
+}
 
 delete_photo.forEach(function (e) {
    e.onclick = function () {

@@ -13,13 +13,13 @@ use application\lib\Db;
 
 class Profile
 {
-    public static function getUserPhotos($id) {
+    public static function getUserPhotos($id, $pag) {
         $dbh = new Db();
         $sql = "SELECT `login`, `usr_img` FROM `users` WHERE `id`= '{$id}'";
         $res = $dbh->row($sql);
         $login = $res['login'];
         $usr_img = $res['usr_img'];
-        $sql = "SELECT * FROM `photos` WHERE `user_id`='{$id}'";
+        $sql = "SELECT * FROM `photos` WHERE `user_id`='{$id}' LIMIT {$pag['this_page_result']}, {$pag['number_of_posts']}";
         $res = $dbh->all($sql);
         $current_user_id = User::getCurrentUser();
         if (empty($res)) {
@@ -81,5 +81,27 @@ class Profile
             $res[$todo] = "";
         }
         return $res;
+    }
+
+    public static function pagination($id) {
+        $pagination = [];
+        $number_of_posts = 6;
+        $dbh = new Db();
+        $sql = "SELECT * FROM `photos` WHERE `user_id`='{$id}'";
+        $res = $dbh->dbQuery($sql);
+        $number_of_photos = $res->rowCount();
+        $number_of_pages = ceil($number_of_photos/$number_of_posts);
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        } else {
+            $page = $_GET['page'];
+        }
+        $this_page_result = ($page - 1)*$number_of_posts;
+        $pagination = [
+            'number_of_pages' => $number_of_pages,
+            'number_of_posts' => $number_of_posts,
+            'this_page_result' => $this_page_result
+        ];
+        return $pagination;
     }
 }

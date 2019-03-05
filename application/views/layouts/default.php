@@ -25,10 +25,10 @@
 </head>
 <body>
 <div class="container nav-mar">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
         <div class="container navb ">
             <a class="navbar-brand" href="http://localhost:8100/camaphp/">OTLICHNIY SITE</a>
-            <div class="collapse navbar-collapse right_col" id="navbarNav">
+            <div id="c">
                 <ul class="navbar-nav" style="width: 100%">
                     <?php if($logged['is_logged']): ?>
                         <li class="nav-item m-auto">

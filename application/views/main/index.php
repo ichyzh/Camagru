@@ -6,7 +6,7 @@
         <div class="col-lg-4 col-md-6 pb-2 usrphoto" >
             <div class="row usrblock" style="background-color: white">
                 <div class="col-5 user-field">
-                    <a href="http://localhost:8100/<?php echo ROOT . "/profile/" . $val['login'] ?>">
+                    <a class="color-link" href="http://localhost:8100/<?php echo ROOT . "/profile/" . $val['login'] ?>">
                         <div class="usrimg" style="background-image: url(<?php echo $val['usr_img'] ?>);">
                         </div>
                         <p class="usrname"><?php echo $val['login'] ?></p>
@@ -49,7 +49,7 @@
             <div class="modal-content"">
             <div class="row mr-4" style="background-color: azure">
                 <span class="hide">&times;</span>
-                <div class="col-4 social" style="background-color: azure; height: 394px">
+                <div class="col-4 social text-center" style="background-color: azure; height: 394px">
                     <span>Login with social profiles</span>
                     <div class="row soc-row">
                         <div class="col-12 auth-btn">
@@ -58,13 +58,9 @@
                         <div class="col-12 auth-btn">
                             <button type="submit" class="btn btn-danger soc-btn" onclick="glOauth();"><i class="fab fa-google soc-icon"></i><span style="padding-left: 1rem">Submit</span></button>
                         </div>
-                        <div class="col-12 auth-btn">
-                            <a href="#"> <button type="submit" class="btn insta soc-btn"><i class="fab fa-instagram soc-icon"></i><span style="padding-left: 1rem">Submit</span></button></a>
-                        </div>
                     </div>
-
                 </div>
-                <div class="col-8 w3-animate-right" id="regForm">
+                <div class="col-8 w3-animate-right text-center" id="regForm">
                     <span>Registration</span>
                     <form class="regForm-content" method="post" id="register" onsubmit="return false;">
                         <div class="form-group row justify-content-center m-2" id="status"></div>
@@ -95,7 +91,7 @@
                         <button type="submit" class="btn btn-primary" onclick="ajax_reg()" id="sbmreg">Submit</button><br>
                     </form>
                 </div>
-                <div class="col-8" id="logForm"">
+                <div class="col-8 text-center" id="logForm">
                 <span>Login</span>
                 <form class="regForm-content" method="post" id="logining" onsubmit="return false;" >
                     <div class="form-group row justify-content-center m-2" id="statuslog"></div>
@@ -112,12 +108,12 @@
                         </div>
                     </div>
                     <button type="submit" class="btn m-2 bt-hov" onclick="ajax_log()" id="sbml">Submit</button><br>
-                    <a href="#" id="notReg">Not registered yet?</a>
-                    <a href="#" id="resPwd">Forgot password?</a>
+                    <p class="nav-link" id="notReg" >Not registered yet?</p>
+                    <p class="nav-link" id="resPwd">Forgot password?</p>
                 </form>
             </div>
-            <div class="col-8 w3-animate-right" id="resForm">
-                <span>Registration</span>
+            <div class="col-8 w3-animate-right text-center" id="resForm">
+                <span>Forgot password</span>
                 <form class="regForm-content" method="post" id="reset" onsubmit="return false;">
                     <div class="form-group row justify-content-center m-2" id="statusres"></div>
                     <div class="form-group row justify-content-center m-2">
@@ -130,7 +126,8 @@
                 </form>
             </div>
         </div>
-</div>
+        </div>
+    </div>
 <!--reg-->
 
 <div id="myModal" class="modal">
@@ -147,14 +144,14 @@
                 <div class="col-9 bod">
                     <div id="caption">
                         <div class="row border-bottom usrcap">
-                            <div class="col-5">
-                                <a href="http://localhost:8100/<?php echo ROOT . "/profile/" . $val['login'] ?>" title="username">
+                            <div class="col-7 col-md-5">
+                                <a class="color-link" href="http://localhost:8100/<?php echo ROOT . "/profile/" . $val['login'] ?>" title="username">
                                     <div class="mask" style="background-image: url(<?php echo $val['usr_img'] ?>);">
                                     </div>
                                     <p class="usrlog w-100"><?php echo $val['login'] ?></p>
                                 </a>
                             </div>
-                            <div class="col-7">
+                            <div class="col-5 col-md-7" id="under_buttons">
                                 <div class="row float-right">
                                     <?php if ($val['liked']): ?>
                                     <?php echo "<div class=\"col-5 text-right\">" ?>
@@ -184,8 +181,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-10 pl-0">
-                            <a href="http://localhost:8100/<?php echo ROOT . "/" . $com['usr_login'] ?>" style="color: #00cc00"><?php echo $com['usr_login'] ?></a>
+                        <div class="col-8 col-md-10 pl-0">
+                            <a href="http://localhost:8100/<?php echo ROOT . "/" . $com['usr_login'] ?>" class="color-link"><?php echo $com['usr_login'] ?></a>
                             <p class="comtext"><?php echo $com['text'] ?></p>
                         </div>
                     </div>
@@ -198,12 +195,12 @@
                         <div class="row m-0 marpic">
                             <div class="col-2 leftcompic">
                                 <a href="" title="username">
-                                    <div class="mask-com" style="background-image: url(<?php echo $_COOKIE['avatar'] ?>)";>
+                                    <div class="mask-com" style="background-image: url(<?php echo "/" . ROOT . "/" . $_COOKIE['avatar'] ?>)";>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-9 leftcom">
+                        <div class="col-6 col-md-9 leftcom">
                             <textarea name=<?php echo $val['phid'] ?> placeholder="Comment" class="form-control comment_field" style="height:60px;" ></textarea>
                         </div>
                         <div class="col-1 leftbtn">
