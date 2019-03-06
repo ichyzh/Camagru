@@ -2,6 +2,10 @@ h1 {
     font-family: 'Montserrat', sans-serif;
 }
 
+video {
+    height: 480px;
+}
+
 .main .row {
     margin-left: 15rem;
 }
@@ -52,6 +56,7 @@ h1 {
 }
 
 .main {
+    padding-left: 2.4rem;
     margin-top: 17rem;
 }
 
@@ -159,7 +164,6 @@ h1 {
     right: 0;
     display: flex;
     height: 480px;
-    width: 640px; ;
 }
 
 .hide {
@@ -180,27 +184,100 @@ h1 {
     }
 }
 
-@media screen and (max-width: 505px) {
-    .prev, .next {
-        padding: 5px;
-        padding-top: 50px;
-        padding-bottom: 50px;
+@media screen and (max-width: 991px) {
+    .back {
+        height: 100%;
+        width: 100%;
     }
 
-    .num_likes_mod {
+    #photos_prev .arrow {
+        padding-top: 1.5rem;
+    }
+
+    .arrow {
+        height: 30px;
+    }
+
+    .arrow-left, .arrow-right, .arrow-up, .arrow-down  {
+        font-size: 1.5rem;
+    }
+
+    video {
+        height: 300px;
+    }
+
+    .item {
+        width: 90px;
+        height: 80px;
+    }
+
+    .over {
+        height: 30%;
+    }
+
+    #list .myImages {
+        height: unset;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 577px) {
+    #photos_prev .arrow {
+        padding-top: 1.5rem;
+    }
+    .back {
+        height: 100%;
+        width: 100%;
+    }
+
+    .arrow {
+        height: 10px;
+    }
+
+    .arrow-left, .arrow-right, .arrow-up, .arrow-down  {
+        font-size: 1.5rem;
+    }
+
+    video {
+        height: 100%;
+        width: 100%;
+    }
+
+    .item {
+        width: 100%;
+        height: 35%;
+    }
+
+    .item img {
+        padding: 0;
+    }
+
+    .over {
+        height: 30%;
+    }
+
+    .arrow-left, .arrow-right, .arrow-up, .arrow-down  {
         font-size: 1rem;
     }
 
-    #under_buttons {
-        margin-top: auto;
-        margin-bottom: auto;
+    .mask_field {
+        padding-left: 0.3rem;
     }
 
-    .change_btn {
-        display: block;
+    #carous {
+        height: 80%;
     }
 
-    .leftbtn .btn {
-        min-width: 1rem;
+    .mask_field .arrow {
+        height: 10%;
     }
+
+    #list .myImages {
+        height: unset;
+        width: 90%;
+    }
+
+
+
 }

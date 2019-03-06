@@ -24,7 +24,7 @@
     <title><?=$title?></title>
 </head>
 <body>
-<div class="container nav-mar">
+<div class="container">
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
         <div class="container navb ">
             <a class="navbar-brand" href="http://localhost:8100/camaphp/">OTLICHNIY SITE</a>

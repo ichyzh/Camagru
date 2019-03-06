@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container text-center profile-field">
     <div class="row ">
         <div class="col-12 col-md-4 p-4 text-center">
             <div class="row usrblock">
-                <div class="col-5 p-0">
+                <div class="col-9 p-0 m-auto">
                     <div class="profile_img" style="background-image: url(<?php echo "/" . ROOT . "/" . $vars[0]['usr_img'] ?>);">
                     </div>
                 </div>

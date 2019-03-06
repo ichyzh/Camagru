@@ -1,12 +1,12 @@
 <div class="container main ">
     <div class="row">
-        <div class="col-8 photo_field">
+        <div class=" col-10 col-lg-8 col-sm-9 col-md-7 photo_field">
             <div>
-                <video id="video" width="640" height="480" autoplay></video>
+                <video id="video" autoplay></video>
                 <div id="here" ></div>
             </div>
         </div>
-        <div class="col-3 mask_field hide w3-animate-right text-center" id="car">
+        <div class="col-2 col-lg-3 col-sm-3 col-md-2 mask_field hide w3-animate-right text-center" id="car">
             <div class="arrow align-middle text-center">
                 <span class="arrow-up"><i class="fas fa-angle-up"></i></span>
             </div>

@@ -153,11 +153,11 @@ function show_user_photos(path) {
     var sd = document.createElement("div");
     var num = document.querySelectorAll(".usrphoto");
     fd.classList.add("usrphoto");
-    sd.classList.add("usr-border");
+    // sd.classList.add("usr-border");
     img.classList.add("myImages");
     img.src = path;
-    sd.appendChild(img);
-    fd.appendChild(sd);
+    fd.appendChild(img);
+    // fd.appendChild(sd);
     list.appendChild(fd);
     show_photo();
     hide_photo();
@@ -254,7 +254,7 @@ function move(elem) {
             elem.style.top  = (e.clientY + offset[1]) + 'px';
         }
     }, true);
-};
+}
 
 // _________________________________________
 

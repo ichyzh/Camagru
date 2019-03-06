@@ -139,6 +139,14 @@ button {
     padding: 50px;
 }
 
+.regForm-content .form-group {
+    margin: .5rem;
+}
+
+.label-form {
+    margin-right: 1.5rem;
+}
+
 .regForm-content p {
     display: inline-block;
 }
@@ -165,6 +173,8 @@ button {
 }
 
 .social {
+    background-color: azure;
+    height: 394px;
     border-width: 0 thin 0 0;
     border-style: solid;
     padding-top: 2rem;
@@ -216,10 +226,6 @@ button {
 
 
 
-.nav-mar {
-    margin-bottom: 4rem;
-}
-
 .navb {
     padding-left: 0.6rem;
 }
@@ -242,6 +248,7 @@ hr {
     margin-bottom: 0.3rem;
 }
 .comtext {
+    word-wrap: break-word;
     padding-top: 0.3rem;
     padding-left: 0rem;
 }
@@ -442,7 +449,6 @@ hr {
 }
 
 .usr-border {
-    /*  border-radius: 5px;*/
     background-color: white;
 }
 
@@ -556,18 +562,6 @@ hr {
     color: #3cdd8c!important;
 }
 
-/*@media only screen and (max-width: 700px) {*/
-    /*.modal-content {*/
-        /*width: 100%;*/
-    /*}*/
-/*}*/
-
-/*@media only screen and (max-width: 1200px) {*/
-    /*.myImages {*/
-        /*height: 200px;*/
-    /*}*/
-/*}*/
-
 /*profile */
 
 .align-middle {
@@ -631,6 +625,10 @@ hr {
 .set_profile:hover {
     opacity: 1;
     color: #3cdd8c;
+}
+
+.profile-field {
+    margin-top: 5rem;
 }
 
 .pag-link {
@@ -700,6 +698,7 @@ hr {
 
 @media screen and (max-width: 505px) {
     .prev, .next {
+        top: 80px;
         padding: 5px;
         padding-top: 50px;
         padding-bottom: 50px;
@@ -723,7 +722,17 @@ hr {
     }
 }
 
+@media screen and (max-width: 970px) {
+    .comtext {
+        max-width: 200px;
+    }
+}
+
 @media screen and (max-width: 376px) {
+
+    .comtext {
+        max-width: 200px;
+    }
     #under_buttons .io_size {
         font-size: 1rem!important;
     }
@@ -737,11 +746,45 @@ hr {
 
 /*login-registration form*/
 @media screen and (max-width: 530px) {
-    .soc-btn {
-        width: 2.3rem;
-        height: 2.3rem;
-        overflow: hidden;
+    .comtext {
+        max-width: 200px;
     }
 }
 
+@media screen and (max-width: 767px) {
+    .hide {
+        color: #ccc;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
 
+    .social {
+        height: auto;
+        border-style: solid;
+        padding-top: 2rem;
+        border-width: 0 0 thin 0;
+        padding-bottom: 1rem;
+    }
+
+    .soc-row {
+        margin-top: 2rem;
+    }
+
+    .regForm-content {
+        padding: 10px;
+    }
+
+    .label-form {
+        margin-right: 0;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-width: 700px;
+    }
+
+    .regForm-content .form-group {
+        margin: 0;
+    }
+}

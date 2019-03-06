@@ -49,7 +49,7 @@
             <div class="modal-content"">
             <div class="row mr-4" style="background-color: azure">
                 <span class="hide">&times;</span>
-                <div class="col-4 social text-center" style="background-color: azure; height: 394px">
+                <div class="col-12 col-md-4 social text-center">
                     <span>Login with social profiles</span>
                     <div class="row soc-row">
                         <div class="col-12 auth-btn">
@@ -60,30 +60,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 w3-animate-right text-center" id="regForm">
+                <div class="col-12 col-md-8 w3-animate-right text-center" id="regForm">
                     <span>Registration</span>
-                    <form class="regForm-content" method="post" id="register" onsubmit="return false;">
-                        <div class="form-group row justify-content-center m-2" id="status"></div>
-                        <div class="form-group row justify-content-center m-2">
-                            <label class="col-sm-3 mr-4 mb-0 pt-1">Email</label>
+                    <form class="regForm-content text-center" method="post" id="register" onsubmit="return false;">
+                        <div class="form-group row justify-content-center " id="status"></div>
+                        <div class="form-group row justify-content-center ">
+                            <label class="col-sm-3 mb-0 pt-1 label-form">Email</label>
                             <div class="col-sm-8 text-left">
                                 <input type="email" class="form-control f-con" id="email" placeholder="Enter email">
                             </div>
                         </div>
-                        <div class="form-group row justify-content-center m-2">
-                            <label class="col-sm-3 mr-4 mb-0 pt-1">Username</label>
+                        <div class="form-group row justify-content-center ">
+                            <label class="col-sm-3 label-form mb-0 pt-1">Username</label>
                             <div class="col-sm-8 text-left">
                                 <input type="text" class="form-control f-con" id="loginr" placeholder="Login">
                             </div>
                         </div>
-                        <div class="form-group row justify-content-center m-2">
-                            <label class="col-sm-3 mr-4 mb-0 pt-1">Password</label>
+                        <div class="form-group row justify-content-center ">
+                            <label class="col-sm-3 label-form mb-0 pt-1">Password</label>
                             <div class="col-sm-8 text-left">
                                 <input type="password" class="form-control f-con" id="pwdr" placeholder="Password">
                             </div>
                         </div>
-                        <div class="form-group row justify-content-center m-2">
-                            <label class="col-sm-3 mr-4 mb-0 pt-1">Password</label>
+                        <div class="form-group row justify-content-center ">
+                            <label class="col-sm-3 label-form mb-0 pt-1">Password</label>
                             <div class="col-sm-8 text-left">
                                 <input type="password" class="form-control f-con" id="pwd2r" placeholder="Password">
                             </div>
@@ -91,18 +91,18 @@
                         <button type="submit" class="btn btn-primary" onclick="ajax_reg()" id="sbmreg">Submit</button><br>
                     </form>
                 </div>
-                <div class="col-8 text-center" id="logForm">
+                <div class="col-12 col-md-8 text-center" id="logForm">
                 <span>Login</span>
                 <form class="regForm-content" method="post" id="logining" onsubmit="return false;" >
-                    <div class="form-group row justify-content-center m-2" id="statuslog"></div>
-                    <div class="form-group row justify-content-center m-2">
-                        <label class="col-sm-3 mr-4 mb-0 pt-1">Username</label>
+                    <div class="form-group row justify-content-center " id="statuslog"></div>
+                    <div class="form-group row justify-content-center ">
+                        <label class="col-sm-3 label-form mb-0 pt-1">Username</label>
                         <div class="col-sm-8 text-left">
                             <input type="text" class="form-control f-con" id="login" placeholder="Login">
                         </div>
                     </div>
-                    <div class="form-group row justify-content-center m-2">
-                        <label class="col-sm-3 mr-4 mb-0 pt-1">Password</label>
+                    <div class="form-group row justify-content-center ">
+                        <label class="col-sm-3 label-form mb-0 pt-1">Password</label>
                         <div class="col-sm-8 text-left">
                             <input type="password" class="form-control f-con" id="pwd" placeholder="Password">
                         </div>
@@ -112,12 +112,12 @@
                     <p class="nav-link" id="resPwd">Forgot password?</p>
                 </form>
             </div>
-            <div class="col-8 w3-animate-right text-center" id="resForm">
+            <div class="col-12 col-md-8 w3-animate-right text-center" id="resForm">
                 <span>Forgot password</span>
                 <form class="regForm-content" method="post" id="reset" onsubmit="return false;">
-                    <div class="form-group row justify-content-center m-2" id="statusres"></div>
-                    <div class="form-group row justify-content-center m-2">
-                        <label class="col-sm-3 mr-4 mb-0 pt-1">Username</label>
+                    <div class="form-group row justify-content-center " id="statusres"></div>
+                    <div class="form-group row justify-content-center ">
+                        <label class="col-sm-3 label-form mb-0 pt-1">Username</label>
                         <div class="col-sm-8 text-left">
                             <input type="email" class="form-control f-con" id="email-res" placeholder="E-mail">
                         </div>

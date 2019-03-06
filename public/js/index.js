@@ -468,7 +468,7 @@ function addComment(result, photo_id) {
     var second_child = document.createElement("div");
     var second_child_1 = document.createElement("a");
     var second_child_2 = document.createElement("p");
-    second_child.classList.add("col-10", "pl-0");
+    second_child.classList.add("col-8", "col-md-10", "pl-0");
     second_child_1.href = "http://localhost:8100/camaphp/" + login;
     second_child_1.innerHTML = login;
     second_child_1.style.color = "#00cc00";
