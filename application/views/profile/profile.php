@@ -151,9 +151,11 @@
                                                 </div>
                                             <?php endif; ?>
                                         </div>
+                                        <?php if($logged['this_user']): ?>
                                         <div class="col-12 text-center">
                                             <button class="btn set_profile" id="<?php echo $val['id'] ?>" onclick="change_picture(this);">Set as profile picture</button>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div id="comments<?php echo $val['id'] ?>">

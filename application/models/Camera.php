@@ -35,7 +35,6 @@ class Camera
         $sql = "INSERT INTO `photos` (user_id, src)
                 VALUES (:uid, :path)";
         $dbh->dbQuery($sql, $params);
-
     }
 
     public static function setPathToPhoto() {

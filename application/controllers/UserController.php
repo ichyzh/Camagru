@@ -152,7 +152,7 @@ class UserController extends Controller
 
     public function actionDeleteAcc() {
         if (!isset($_POST['submit']) || !isset($_POST['id'])) {
-            View::errorCode(403);
+            View::errorCode(404);
         } else {
             User::deleteAccount($_POST['id']);
         }

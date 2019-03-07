@@ -1,3 +1,5 @@
+var ROOT = location.pathname.split("/")[1];
+
 var regModal = document.getElementById('regModal');
 var logForm = document.getElementById('logForm');
 var regForm = document.getElementById('regForm');
@@ -6,8 +8,6 @@ var regbtn = document.getElementById('regbtn');
 var logbtn = document.getElementById('logbtn');
 var notReg = document.getElementById('notReg');
 var resbtn = document.getElementById('resPwd');
-
-// var cont = document.getElementById('drop_cont');
 
 function drop(e) {
     var cont = document.getElementById('drop_cont');
@@ -135,7 +135,7 @@ function ajax_reg(){
 
     console.log("PRIVET");
     var xhr = new XMLHttpRequest();
-    var url = 'http://localhost:8100/camaphp/register';
+    var url = 'http://localhost:8100/' + ROOT + '/register';
     var submit = document.getElementById('sbmreg');
     var vars = "submit="+submit.value+"&login="+login.value+"&pwd="+pwd.value+"&pwd2="+pwd2.value+"&email="+email.value;
     xhr.open("POST", url, true);
@@ -209,7 +209,7 @@ function ajax_log(){
 
     console.log("KUKUSIKI");
     var xhr = new XMLHttpRequest();
-    var url = 'http://localhost:8100/camaphp/login';
+    var url = 'http://localhost:8100/' + ROOT + '/login';
     var submit = document.getElementById('sbml');
     var vars = "submit="+submit.value+"&login="+loginl.value+"&pwd="+pwdl.value;
     xhr.open("POST", url, true);
@@ -260,7 +260,7 @@ var reset = document.getElementById('email-res');
 function ajax_reset() {
     console.log("NU ZDAROVA");
     var xhr = new XMLHttpRequest();
-    var url = 'http://localhost:8100/camaphp/reset';
+    var url = 'http://localhost:8100/' + ROOT + '/reset';
     var submit = document.getElementById('sbmres');
     var vars = "submit="+submit.value+"&email="+reset.value;
     xhr.open("POST", url, true);
@@ -289,7 +289,7 @@ function ajax_reset() {
 
 function fbOauth()
 {
-    var fwind = window.open("https://www.facebook.com/v3.2/dialog/oauth?client_id=370707770156794&display=popup&redirect_uri=http://localhost:8100/camaphp/fboauth&state={st=log,pr=pas345}&response_type=code&scope=email", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
+    var fwind = window.open("https://www.facebook.com/v3.2/dialog/oauth?client_id=370707770156794&display=popup&redirect_uri=http://localhost:8100/" + ROOT + "/fboauth&state={st=log,pr=pas345}&response_type=code&scope=email", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
     var code = fwind.location.href;
     var timer = setInterval(function () {
         fwind.close();
@@ -297,7 +297,7 @@ function fbOauth()
     var rel = setInterval(function () {
         if (fwind.closed) {
             var xhr = new XMLHttpRequest();
-            var url = 'http://localhost:8100/camaphp/fboauth';
+            var url = 'http://localhost:8100/' + ROOT + '/fboauth';
             var vars = "code=" + code.value;
             xhr.open("POST", url, true);
 
@@ -322,7 +322,7 @@ function fbOauth()
 
 function glOauth()
 {
-    var gwind = window.open("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me&redirect_uri=http://localhost:8100/camaphp/googleoauth&response_type=code&client_id=623341989817-1eaol269rh7hh3rdi5h9l7daq3t1a2np.apps.googleusercontent.com&access_type=online", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
+    var gwind = window.open("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me&redirect_uri=http://localhost:8100/" + ROOT + "/googleoauth&response_type=code&client_id=623341989817-1eaol269rh7hh3rdi5h9l7daq3t1a2np.apps.googleusercontent.com&access_type=online", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
     var code = gwind.location.href;
     var timer = setInterval(function () {
         gwind.close();
@@ -330,7 +330,7 @@ function glOauth()
     var rel = setInterval(function() {
         if (gwind.closed) {
             var xhr = new XMLHttpRequest();
-            var url = 'http://localhost:8100/camaphp/googleoauth';
+            var url = 'http://localhost:8100/' + ROOT + '/googleoauth';
             var vars = "code=" + code.value;
             xhr.open("POST", url, true);
 
@@ -362,7 +362,7 @@ var like = document.querySelectorAll("#like");
 like.forEach(function(e) {
     e.onclick = function() {
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/like';
+        var url = 'http://localhost:8100/' + ROOT + '/like';
         var photo_id = e.value;
         var vars = "photo_id=" + photo_id;
         xhr.open("POST", url, true);
@@ -371,7 +371,6 @@ like.forEach(function(e) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 if (xhr.responseText) {
-                    console.log(document.cookie.indexOf('id'));
                     if (document.cookie.indexOf('id') === -1 ) {
                         return ;
                     }
@@ -393,9 +392,7 @@ like.forEach(function(e) {
                             e.children[0].children[0].innerHTML = parseInt(e.children[0].innerText) + 1;
                         }
                     }
-                }
-                else
-                    console.log("7777777");
+                };
             }
         };
         xhr.send(vars);
@@ -417,7 +414,7 @@ send_btn.forEach(function(e) {
         var n = find_text(photo_id);
         var comment = comment_text[n].value;
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/comment';
+        var url = 'http://localhost:8100/' + ROOT + '/comment';
         var vars = "photo_id=" + photo_id + "&comment=" + comment;
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
@@ -462,14 +459,14 @@ function addComment(result, photo_id) {
     first_child.classList.add("row", "m-0", "marpic");
     first_child_1.classList.add("col-2");
     first_child_1_1.title = "username";
-    first_child_1_1.href = "http://localhost:8100/camaphp/" + login;
+    first_child_1_1.href = "http://localhost:8100/" +  + result.root + login;
     first_child_1_1_1.classList.add("mask-com");
     first_child_1_1_1.style.backgroundImage = 'url(' + img + ')';
     var second_child = document.createElement("div");
     var second_child_1 = document.createElement("a");
     var second_child_2 = document.createElement("p");
     second_child.classList.add("col-8", "col-md-10", "pl-0");
-    second_child_1.href = "http://localhost:8100/camaphp/" + login;
+    second_child_1.href = "http://localhost:8100/" +  + result.root + login;
     second_child_1.innerHTML = login;
     second_child_1.style.color = "#00cc00";
     second_child_2.innerHTML = comment;

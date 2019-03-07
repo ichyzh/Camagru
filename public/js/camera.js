@@ -1,3 +1,5 @@
+var ROOT = location.pathname.split("/")[1];
+
 // Grab elements, create settings, etc.
 var video = document.getElementById('video');
 
@@ -112,7 +114,7 @@ snap.addEventListener("click", function() {
 });
 save_photo.addEventListener("click", function() {
     var xhr = new XMLHttpRequest();
-    var url = 'http://localhost:8100/camaphp/add_watermark';
+    var url = 'http://localhost:8100/' + ROOT + '/add_watermark';
     var data_photos = {};
     data_photos.main_photo = document.getElementsByClassName("back")[0].src;
     var watermark = document.getElementsByClassName("over");

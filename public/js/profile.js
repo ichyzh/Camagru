@@ -1,3 +1,5 @@
+var ROOT = location.pathname.split("/")[1];
+
 var regModal = document.getElementById('regModal');
 var logForm = document.getElementById('logForm');
 var regForm = document.getElementById('regForm');
@@ -93,7 +95,7 @@ var like = document.querySelectorAll("#like");
 like.forEach(function(e) {
     e.onclick = function() {
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/like';
+        var url = 'http://localhost:8100/' + ROOT + '/like';
         var photo_id = e.value;
         var vars = "photo_id=" + photo_id;
         xhr.open("POST", url, true);
@@ -143,7 +145,7 @@ send_btn.forEach(function(e) {
         var n = find_text(photo_id);
         var comment = comment_text[n].value;
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/comment';
+        var url = 'http://localhost:8100/' + ROOT + '/comment';
         var vars = "photo_id=" + photo_id + "&comment=" + comment;
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
@@ -177,7 +179,7 @@ function find_text(id) {
 function addComment(result, photo_id) {
     var login = result.login;
     var comment = result.text;
-    var img = "/camaphp/" + result.usr_img;
+    var img = "/" + result.root + result.usr_img;
 
     var field_to_add = document.getElementById("comments" + photo_id);
     var main_div = document.createElement("div");
@@ -190,14 +192,14 @@ function addComment(result, photo_id) {
     first_child.classList.add("row", "m-0", "marpic");
     first_child_1.classList.add("col-2");
     first_child_1_1.title = "username";
-    first_child_1_1.href = "http://localhost:8100/camaphp/" + login;
+    first_child_1_1.href = "http://localhost:8100/" + result.root + login;
     first_child_1_1_1.classList.add("mask-com");
     first_child_1_1_1.style.backgroundImage = 'url(' + img + ')';
     var second_child = document.createElement("div");
     var second_child_1 = document.createElement("a");
     var second_child_2 = document.createElement("p");
     second_child.classList.add("col-10", "pl-0");
-    second_child_1.href = "http://localhost:8100/camaphp/" + login;
+    second_child_1.href = "http://localhost:8100/" + result.root + login;
     second_child_1.innerHTML = login;
     second_child_1.style.color = "#00cc00";
     second_child_2.innerHTML = comment;
@@ -219,13 +221,11 @@ function addComment(result, photo_id) {
 /************************************/
 /************************************/
 
-var notifications = document.getElementById("disable_notif");
 var form_login = document.getElementById("form-login-change");
 var form_pw = document.getElementById("form-pw-change");
 var form_email = document.getElementById("form-email-change");
-var checkbox = document.getElementById("checkbox");
 var delete_photo = document.querySelectorAll(".delete_photo");
-var set_as_profile = document.querySelectorAll(".set_profile");
+
 
 function change_login () {
     if (form_login.classList.contains("hidden")) {
@@ -258,25 +258,20 @@ function send_login () {
     var new_login = form_login.children[0].value;
     if (new_login !== "") {
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/change_login';
+        var url = 'http://localhost:8100/' + ROOT + '/change_login';
         var vars = "new_login=" + new_login + "&submit=OK";
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.href = "http://localhost:8100/" + ROOT;
                 if (xhr.responseText) {
-                    console.log(xhr.responseText);
                     var result = JSON.parse(xhr.responseText);
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);
-    }
-    else {
-        console.log("LOH");
     }
 }
 
@@ -286,19 +281,17 @@ function send_pwd () {
     var reppw = form_pw.children[2].value;
     if (oldpw !== "" && newpw !== "" && reppw !== "") {
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/change_pwd';
+        var url = 'http://localhost:8100/' + ROOT + '/change_pwd';
         var vars = "old_pw=" + oldpw + "&new_pw=" + newpw + "&rep_pw=" + reppw + "&submit=OK";
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.reload(false);
                 if (xhr.responseText) {
-                    console.log(xhr.responseText);
                     var result = JSON.parse(xhr.responseText);
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);
@@ -309,19 +302,17 @@ function send_email () {
     var new_email = form_email.children[0].value;
     if (new_email !== "") {
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/change_email';
+        var url = 'http://localhost:8100/' + ROOT + '/change_email';
         var vars = "new_email=" + new_email + "&submit=OK";
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.reload(false);
                 if (xhr.responseText) {
-                    console.log(xhr.responseText);
                     var result = JSON.parse(xhr.responseText);
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);
@@ -333,7 +324,7 @@ function delete_acc(e) {
     if (result) {
         var id = e.title;
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/delete_acc';
+        var url = 'http://localhost:8100/' + ROOT + '/delete_acc';
         var vars = "submit=OK" + "&id=" + id;
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
@@ -347,17 +338,15 @@ function delete_acc(e) {
                         window.location.href = result.resp;
                     }
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);
     }
-};
+}
 
 function disable_notif() {
     var xhr = new XMLHttpRequest();
-    var url = 'http://localhost:8100/camaphp/disable_notification';
+    var url = 'http://localhost:8100/' + ROOT + '/disable_notification';
     var vars = "submit=OK";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
@@ -365,11 +354,8 @@ function disable_notif() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             if (xhr.responseText) {
-                console.log(xhr.responseText);
                 var result = JSON.parse(xhr.responseText);
             }
-            else
-                console.log("7777777");
         }
     };
     xhr.send(vars);
@@ -381,7 +367,7 @@ delete_photo.forEach(function (e) {
        if (result) {
            var photo_id = e.id;
            var xhr = new XMLHttpRequest();
-           var url = 'http://localhost:8100/camaphp/delete_photo';
+           var url = 'http://localhost:8100/' + ROOT + '/delete_photo';
            var vars = "submit=OK" + "&phid=" + photo_id;
            xhr.open("POST", url, true);
            xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
@@ -390,10 +376,7 @@ delete_photo.forEach(function (e) {
                if (xhr.readyState === 4 && xhr.status === 200) {
                    if (xhr.responseText) {
                        window.location.reload(false);
-                       var result = JSON.parse(xhr.responseText);
                    }
-                   else
-                       console.log("7777777");
                }
            };
            xhr.send(vars);
@@ -405,18 +388,17 @@ function change_picture(e) {
     var id = e.id;
             var photo_id = e.id;
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/change_picture';
+        var url = 'http://localhost:8100/' + ROOT + '/change_picture';
         var vars = "submit=OK" + "&phid=" + id;
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.reload(false);
                 if (xhr.responseText) {
                     var result = JSON.parse(xhr.responseText);
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);

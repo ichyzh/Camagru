@@ -31,7 +31,6 @@ class User
     }
     public static function register($login, $pwd, $email, $img = null, $active = 0)
     {
-        echo $login . " " . $pwd . " " . $email;
         $dbh = new Db;
         if (!$img) {
             $img = "private/images/default.jpg";
@@ -84,7 +83,8 @@ class User
         if ($query->rowCount() > 0) {
             $result = $query->fetch(PDO::FETCH_ASSOC);
             $subject = "Verify your e-mail";
-            $message = "Hi,<br> <br>To verify you e-mail address click on this link http://localhost:8100/camaphp/verif?email=".$email."&token=".$result['active_hash']."<br>";
+            $link = "http://localhost:8100/camaphp/verif?email=". $email. "&token=" . $result['active_hash'];
+            $message = "Hi,<br> <br>To verify you e-mail address click on this <a href='$link'>link</a><br>";
             User::sendMail($email, $subject, $message);
         }
     }
@@ -110,9 +110,10 @@ class User
     public static function checkPasswordRegister($pwd, $pwd2, $errors)
     {
         if (strcmp($pwd, $pwd2) === 0) {
-            if (strlen($pwd) >= 6)
+            if (preg_match("#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$#", $pwd)) {
                 return $errors;
-            $errors["pwd"] = "Too short password";
+            }
+            $errors["pwd"] = "Invalid password";
             return $errors;
         }
         $errors["pwd2"] = "Passwords don't match";
@@ -165,6 +166,10 @@ class User
 
     public static function checkUserLogining($login, $pwd, $errors = [])
     {
+        if (strlen($login) < 5) {
+            $errors["login"] = "Too short login";
+            return $errors;
+        }
         $query = User::selectFromDatabaseByCol("login", $login);
         if ($query->rowCount() >= 1)
         {
@@ -378,13 +383,11 @@ class User
         if ($res->rowCount() <= 0) {
             User::register($login, $pwd, $email, $img,  1);
             User::setCookies($login);
-            echo "fffff";
         } else {
             $dbh = new Db();
             $sql = "SELECT `login` FROM `users` WHERE `email`='{$email}'";
             $res = $dbh->row($sql);
             User::setCookies($res['login']);
-            echo 444444;
         }
     }
 
@@ -440,7 +443,8 @@ class User
             ];
             $sql = "UPDATE `users` SET `login` = :new_login WHERE `id`= :id";
             $dbh->dbQuery($sql, $params);
-            $_COOKIE["login"] = $new_login;
+            setcookie("login", "", time()-3600);
+            setcookie("login", $new_login, time()+86400);
             return true;
         }
         return false;
@@ -462,14 +466,17 @@ class User
         if ($newpw !== $reppw) {
             return false;
         }
-        $pas = hash('whirlpool', $newpw);
-        $sql = "UPDATE `users` SET `passwd`= :pwd WHERE `id` = :id";
-        $params = [
-            "pwd" => $pas,
-            "id" => $id['id']
-        ];
-        $dbh->dbQuery($sql, $params);
-        return true;
+        if (preg_match("#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$#", $newpw)) {
+            $pas = hash('whirlpool', $newpw);
+            $sql = "UPDATE `users` SET `passwd`= :pwd WHERE `id` = :id";
+            $params = [
+                "pwd" => $pas,
+                "id" => $id['id']
+            ];
+            $dbh->dbQuery($sql, $params);
+            return true;
+        }
+        return false;
     }
 
     public static function changeEmail($new_email) {
@@ -526,6 +533,11 @@ class User
                 $dbh->delete("comments", "photo_id", $val['id']);
             }
             $dbh->delete("users", "id", $id);
+            $sql = "SELECT `src` FROM `photos` WHERE `user_id`='{$id}'";
+            $res = $dbh->all($sql);
+            foreach ($res as $src) {
+                unlink($src['src']);
+            }
             $dbh->delete("photos", "user_id", $id);
             $dbh->delete("likes", "user_id", $id);
             $dbh->delete("comments", "user_id", $id);
@@ -538,6 +550,21 @@ class User
         $dbh = new Db();
         $sql = "SELECT `src` FROM `photos` WHERE `id`='{$id}'";
         $src = $dbh->row($sql);
+        $sql = "SELECT `id` FROM `users` WHERE `usr_img`='{$src['src']}'";
+        $img = $dbh->row($sql);
+        $curr_id = self::getCurrentUser();
+        if (isset($img['id'])) {
+            $params = [
+                "img" => "private/images/default.jpg",
+                "id" => $img['id'],
+            ];
+            $sql = "UPDATE `users` SET `usr_img`= :img WHERE `id` = :id";
+            $dbh->dbQuery($sql, $params);
+            if ($curr_id['id'] == $img['id']) {
+                setcookie("avatar", "", time()-3600);
+                setcookie("avatar", "private/images/default.jpg", time()+86400);
+            }
+        }
         unlink($src['src']);
         $dbh->delete("photos", "id", $id);
         $dbh->delete("likes", "photo_id", $id);

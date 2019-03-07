@@ -39,7 +39,7 @@
             'login' => 'admin',
             'pwd' => "$pass",
             'email' => 'ichyzh@ukr.net',
-            'img' => 'https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-721562.jpg',
+            'img' => 'private/images/default.jpg',
             'active_hash' => '11111',
             'adm' => '1',
             'notif' => '1',

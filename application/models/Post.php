@@ -45,6 +45,7 @@ class Post extends Model
             $query = $dbh->dbQuery($sql);
             $res = $query->fetch(\PDO::FETCH_ASSOC);
             $res['text'] = $comment;
+            $res['root'] = ROOT . "/";
             return $res;
         }
         $res['error'] = "empty";

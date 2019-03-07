@@ -27,12 +27,12 @@
 <div class="container">
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
         <div class="container navb ">
-            <a class="navbar-brand" href="http://localhost:8100/camaphp/">OTLICHNIY SITE</a>
+            <a class="navbar-brand" href="http://localhost:8100/<?php echo ROOT ?>/">OTLICHNIY SITE</a>
             <div id="c">
                 <ul class="navbar-nav" style="width: 100%">
                     <?php if($logged['is_logged']): ?>
                         <li class="nav-item m-auto">
-                            <a class="nav-link" href="http://localhost:8100/camaphp/create_photo">Create Photo</a>
+                            <a class="nav-link" href="http://localhost:8100/<?php echo ROOT ?>/create_photo">Create Photo</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item ml-auto">
@@ -46,10 +46,10 @@
             </div>
             <?php if($logged['is_logged']): ?>
             <div class="dropdown" onclick="drop();">
-                <div class="usrimgp dropbtn" id="dropacc" style="background-image: url(/camaphp/<?php echo $_COOKIE['avatar'] ?>);"></div>
+                <div class="usrimgp dropbtn" id="dropacc" style="background-image: url(<?php echo "/" . ROOT . "/" . $_COOKIE['avatar'] ?>);"></div>
                 <div class="dropdown-content w3-animate-top hidden" id="drop_cont">
-                    <a href="http://localhost:8100/camaphp/profile/<?php echo $_COOKIE['login'] ?>" class="accdrop">My Profile</a>
-                    <a href="http://localhost:8100/camaphp/logout" class="accdrop">Log out</a>
+                    <a href="http://localhost:8100/<?php echo ROOT . "/profile/" . $_COOKIE['login'] ?>" class="accdrop">My Profile</a>
+                    <a href="http://localhost:8100/<?php echo ROOT ?>/logout" class="accdrop">Log out</a>
                 </div>
             </div>
             <?php endif; ?>
