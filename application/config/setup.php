@@ -1,9 +1,8 @@
 <?php
- include 'database.php';
 
-
+    $config = require 'database.php';
     try {
-        $dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $dbh = new PDO($config['db_dsn'], $config['db_user'], $config['db_password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     } catch (PDOException $e) {
         echo 'Connection Error: ' . $e->getMessage();
         exit;
@@ -11,6 +10,8 @@
 
     $sql = "CREATE DATABASE IF NOT EXISTS `camagrudb`";
     $dbh->exec($sql);
+
+    $dbh = new PDO($config['db_dsn'] . $config['db_name'], $config['db_user'], $config['db_password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 
     $sql = "CREATE TABLE IF NOT EXISTS `users` (
@@ -52,6 +53,15 @@
                 `user_id` INT(11) NOT NULL,
                 `src` VARCHAR(512) NOT NULL 
         );";
+    $dbh->exec($sql);
+
+    $sql = "INSERT INTO `photos`(user_id, src)
+            VALUES(1, 'private/images/1.png'),
+                  (1, 'private/images/2.png'),
+                  (1, 'private/images/3.png'),
+                  (1, 'private/images/4.png'),
+                  (1, 'private/images/5.png'),
+                  (1, 'private/images/6.png')";
     $dbh->exec($sql);
 
     $sql = "CREATE TABLE IF NOT EXISTS `comments` (

@@ -10,6 +10,7 @@ namespace application\controllers;
 use application\core\Controller;
 use application\models\Camera;
 use application\models\User;
+use application\core\View;
 
 
 class CameraController extends Controller
@@ -18,6 +19,8 @@ class CameraController extends Controller
         $logged['is_logged'] = User::checkCookies($_COOKIE);
         if ($logged) {
             $this->view->render('Camera', $logged);
+        } else {
+            View::errorCode(404);
         }
     }
     public function actionWatermark() {

@@ -29,6 +29,8 @@ class PostController extends Controller
             }
             echo 0;
             return ;
+        } else {
+            View::errorCode(404);
         }
     }
     public function actionComment() {
@@ -42,7 +44,8 @@ class PostController extends Controller
             $arr['error'] = "must login";
             echo json_encode($arr);
             return ;
+        } else {
+            View::errorCode(404);
         }
-        View::errorCode(404);
     }
 }

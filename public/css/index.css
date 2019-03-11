@@ -696,6 +696,17 @@ hr {
     color: #00cc00;
 }
 
+.error_link {
+    color: blue;
+    font-size: 5rem;
+    text-decoration: underline;
+}
+
+.error_link:hover {
+    color: blue;
+    text-decoration: none;
+}
+
 @media screen and (max-width: 505px) {
     .prev, .next {
         top: 80px;

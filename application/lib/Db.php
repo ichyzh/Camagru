@@ -10,21 +10,17 @@ class Db
 
     public function __construct()
     {
-        require ROOT_FOLD .'/application/config/database.php';
+        $conf = require ROOT_FOLD .'/application/config/database.php';
         try {
-            $this->dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->dbh = new PDO($conf['db_dsn'] . $conf['db_name'], $conf['db_user'], $conf['db_password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (\PDOException $e) {
-            $this->err = 1;
+            if ($e->getCode() === 1049) {
+                echo 11111;
+                require ROOT_FOLD . '/application/config/setup.php';
+                header("Location: /" . ROOT);
+            }
         }
     }
-//    public function getDbConnection() {
-//
-//        include ROOT.'/config/database.php';
-//
-//        $this->dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-//
-////        return $dbh;
-//    }
 
     public function dbQuery($sql, $params = [])
     {

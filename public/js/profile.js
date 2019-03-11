@@ -1,18 +1,8 @@
 var ROOT = location.pathname.split("/")[1];
 
 var regModal = document.getElementById('regModal');
-var logForm = document.getElementById('logForm');
-var regForm = document.getElementById('regForm');
-var resForm = document.getElementById('resForm');
-var regbtn = document.getElementById('regbtn');
-var logbtn = document.getElementById('logbtn');
-var notReg = document.getElementById('notReg');
-var resbtn = document.getElementById('resPwd');
-
-var cont = document.getElementById('drop_cont');
 
 function drop() {
-    console.log(111);
     var cont = document.getElementById('drop_cont');
     if (cont.classList.contains("hidden")) {
         cont.classList.remove("hidden");
@@ -22,15 +12,7 @@ function drop() {
     }
 }
 
-//________images_________________________//
-// create references to the modal...
 var modal = document.getElementById('myModal');
-// to all images -- note I'm using a class!
-var images = document.getElementsByClassName('myImages');
-// the image in the modal
-var modalImg = document.getElementById("img01");
-// and the caption in the modal
-var captionText = document.getElementById("caption");
 
 function openModal() {
     document.getElementById('myModal').style.display = "block";
@@ -64,14 +46,11 @@ window.onclick = function(event) {
 /************************************/
 /************************************/
 
-// Next/previous controls
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
-// Thumbnail image controls
 function currentSlide(n) {
-    console.log(n);
     showSlides(slideIndex = n);
 }
 
@@ -104,7 +83,6 @@ like.forEach(function(e) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 if (xhr.responseText) {
-                    console.dir(e.children[0].children[0]);
                     if (e.classList.contains("liked")) {
                         e.classList.remove("liked");
                         if ((parseInt(e.children[0].innerText) - 1) === 0) {
@@ -120,10 +98,7 @@ like.forEach(function(e) {
                             e.children[0].children[0].innerHTML = parseInt(e.children[0].innerText) + 1;
                         }
                     }
-                    console.dir(e.children[0]);
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);
@@ -159,8 +134,6 @@ send_btn.forEach(function(e) {
                         addComment(result, photo_id);
                     }
                 }
-                else
-                    console.log("7777777");
             }
         };
         xhr.send(vars);
@@ -332,7 +305,6 @@ function delete_acc(e) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 if (xhr.responseText) {
-                    console.log(xhr.responseText);
                     var result = JSON.parse(xhr.responseText);
                     if (result.resp) {
                         window.location.href = result.resp;
@@ -386,21 +358,20 @@ delete_photo.forEach(function (e) {
 
 function change_picture(e) {
     var id = e.id;
-            var photo_id = e.id;
-        var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/' + ROOT + '/change_picture';
-        var vars = "submit=OK" + "&phid=" + id;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    var xhr = new XMLHttpRequest();
+    var url = 'http://localhost:8100/' + ROOT + '/change_picture';
+    var vars = "submit=OK" + "&phid=" + id;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                window.location.reload(false);
-                if (xhr.responseText) {
-                    var result = JSON.parse(xhr.responseText);
-                }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            window.location.reload(false);
+            if (xhr.responseText) {
+                var result = JSON.parse(xhr.responseText);
             }
-        };
-        xhr.send(vars);
+        }
+    };
+    xhr.send(vars);
 }
 

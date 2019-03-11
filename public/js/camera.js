@@ -1,35 +1,29 @@
 var ROOT = location.pathname.split("/")[1];
 
-// Grab elements, create settings, etc.
 var video = document.getElementById('video');
 
-// Get access to the camera!
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Not adding `{ audio: true }` since we only want video now
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-        //video.src = window.URL.createObjectURL(stream);
         video.srcObject = stream;
         video.play();
     });
 }
-
-//  Legacy code below: getUserMedia
-// else if(navigator.getUserMedia) { // Standard
-//     navigator.getUserMedia({ video: true }, function(stream) {
-//         video.src = stream;
-//         video.play();
-//     }, errBack);
-// } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-//     navigator.webkitGetUserMedia({ video: true }, function(stream){
-//         video.src = window.webkitURL.createObjectURL(stream);
-//         video.play();
-//     }, errBack);
-// } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
-//     navigator.mozGetUserMedia({ video: true }, function(stream){
-//         video.srcObject = stream;
-//         video.play();
-//     }, errBack);
-// }
+else if(navigator.getUserMedia) { // Standard
+    navigator.getUserMedia({ video: true }, function(stream) {
+        video.src = stream;
+        video.play();
+    }, errBack);
+} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+    navigator.webkitGetUserMedia({ video: true }, function(stream){
+        video.src = window.webkitURL.createObjectURL(stream);
+        video.play();
+    }, errBack);
+} else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+    navigator.mozGetUserMedia({ video: true }, function(stream){
+        video.srcObject = stream;
+        video.play();
+    }, errBack);
+}
 
 
 // Elements for taking the snapshot
@@ -69,7 +63,6 @@ file_photo.onchange = function (evt) {
             var data = fr.result.split(':');
             var res = data[1].split(';');
             var type = res[0].split('/');
-            console.log(type[0]);
             if (type[0] === "image") {
                 carous.classList.remove("hide");
                 var elem = document.createElement('img');
@@ -87,11 +80,6 @@ file_photo.onchange = function (evt) {
             }
         };
         fr.readAsDataURL(files[0]);
-    }
-    // Not supported
-    else {
-        // fallback -- perhaps submit the input to an iframe and temporarily store
-        // them on the server until the user's session ends.
     }
 };
 
@@ -134,14 +122,10 @@ save_photo.addEventListener("click", function() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             if (xhr.responseText) {
-                console.log(xhr.responseText);
                 var return_data = xhr.responseText;
                 var result = JSON.parse(return_data);
                 show_user_photos(result.path);
-                //TODO: Check and print errors of input data
             }
-            else
-                console.log("5555");
         }
     };
     xhr.send(vars);
@@ -170,9 +154,6 @@ function show_user_photos(path) {
 
 
 }
-//____________________________________________________
-
-// ___________________________________________________
 
 /************************************/
 /************************************/
@@ -250,15 +231,13 @@ function move(elem) {
     }, true);
 
     here.addEventListener('mousemove', function(e) {
-        event.preventDefault();
+        e.preventDefault();
         if (isDown) {
             elem.style.left = (e.clientX + offset[0]) + 'px';
             elem.style.top  = (e.clientY + offset[1]) + 'px';
         }
     }, true);
 }
-
-// _________________________________________
 
 /************************************/
 /************************************/
@@ -304,7 +283,6 @@ function hide_photo() {
 }
 
 function drop() {
-    console.log(111);
     var cont = document.getElementById('drop_cont');
     if (cont.classList.contains("hidden")) {
         cont.classList.remove("hidden");

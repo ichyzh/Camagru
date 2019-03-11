@@ -3,9 +3,6 @@
     session_start();
 
     use application\core\Router;
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-
 
     define('ROOT_FOLD', dirname(__FILE__));
 

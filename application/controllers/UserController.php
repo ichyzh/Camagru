@@ -35,8 +35,9 @@ class UserController extends Controller
                 User::register($login, $pwd, $email);
                 User::sendVerifMail($email);
             }
-        } else
-            echo "ti sho";
+        } else {
+            View::errorCode(404);
+        }
     }
 
     public function actionVerify() {
@@ -53,6 +54,8 @@ class UserController extends Controller
             $errors = User::checkUserLogining($login, $pwd, $errors);
 
             echo json_encode($errors);
+        } else {
+            View::errorCode(404);
         }
     }
 
@@ -74,12 +77,12 @@ class UserController extends Controller
         elseif (!empty($_GET)) {
             if (User::checkEmailForPassword($_GET)) {
                 $this->view->render('Reset Page', false);
-            }
-            else
+            } else {
                 View::errorCode(404);
-        }
-        else
+            }
+        } else {
             View::errorCode(404);
+        }
     }
 
     public function actionResetPwd() {
@@ -90,31 +93,40 @@ class UserController extends Controller
             $pwd2 = htmlspecialchars($_POST['pwd2']);
             $email = htmlspecialchars($_POST['email']);
             $errors = User::resetPassword($email, $pwd, $pwd2, $errors);
+            echo json_encode($errors);
+        } else {
+            View::errorCode(404);
         }
-        echo json_encode($errors);
     }
 
     public function actionFacebookOauth() {
         if (!empty($_GET['code'])) {
             User::facebookOauth();
+            echo "Hello";
+        } else {
+            View::errorCode(404);
         }
-        echo json_encode("ok");
     }
 
     public function actionGoogleOauth() {
         if (!empty($_GET['code'])){
             User::googleOauth();
-            echo "ok";
+            echo "Hello";
+        } else {
+            View::errorCode(404);
         }
     }
 
     public function actionChangeLogin() {
-        if (isset($_POST['new_login']) && $_POST['new_login'] != "") {
+        if (isset($_POST['new_login']) && $_POST['new_login'] != "" && isset($_POST['submit'])) {
             if (User::changeLogin($_POST['new_login'])) {
                 echo 1;
             } else {
                 echo 2;
             }
+        }
+        else {
+            View::errorCode(404);
         }
     }
 
@@ -126,12 +138,12 @@ class UserController extends Controller
                 echo 2;
             }
         } else
-            View::errorCode(403);
+            View::errorCode(404);
     }
 
     public function actionChangeEmail() {
         if (!isset($_POST['submit'])) {
-            View::errorCode(403);
+            View::errorCode(404);
         }
         if (isset($_POST['new_email'])) {
             if (User::changeEmail($_POST['new_email'])) {
@@ -144,7 +156,7 @@ class UserController extends Controller
 
     public function actionNotification() {
         if (!isset($_POST['submit'])) {
-            View::errorCode(403);
+            View::errorCode(404);
         } else {
             User::notifications();
         }
@@ -160,7 +172,7 @@ class UserController extends Controller
 
     public function actionDeletePhoto() {
         if (!isset($_POST['submit']) || !isset($_POST['phid'])) {
-            View::errorCode(403);
+            View::errorCode(404);
         } else {
             User::deletePhoto($_POST['phid']);
             echo json_encode("ok");
@@ -169,7 +181,7 @@ class UserController extends Controller
 
     public function actionChangePicture() {
         if (!isset($_POST['submit']) || !isset($_POST['phid'])) {
-            View::errorCode(403);
+            View::errorCode(404);
         } else {
             User::changePicture($_POST['phid']);
         }

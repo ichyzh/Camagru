@@ -180,7 +180,7 @@ class User
                     User::setCookies($login);
                     return $errors;
                 }
-                $errors["pwd"] = "Wrong Password";
+                $errors["all"] = "Wrong Password or Login";
                 return $errors;
             }
             $errors['active'] = "Please verify your email";
@@ -309,12 +309,14 @@ class User
 
         if (!$data)
             exit('error data');
+        $login = $data['first_name'] . "_" . $data['last_name'];
         $img = false;
-        if (!$data['picture']['data']['is_silhouette'])
-            $img  = 'https://graph.facebook.com/v3.2/' . $data['id'] . '/picture?width=400&height=400';
+        if (!$data['picture']['data']['is_silhouette']) {
+            $path = "private/images/";
+            copy('https://graph.facebook.com/v3.2/' . $data['id'] . '/picture?width=400&height=400', $path . $login . '.png');
+            $img = $path . $login . '.png';
+        }
         $email = $data['email'];
-        $login = $data['first_name'] . "." . $data['last_name'];
-
         User::socialAuth($login, $email, $img);
     }
 
@@ -330,7 +332,9 @@ class User
                 if ($user_info['image']['isDefault']) {
                     $img = null;
                 } else {
-                    $img = $user_info['image']['url'];
+                    $path = "private/images/";
+                    copy($user_info['image']['url'], $path . $login . '.png');
+                    $img = $path . $login . '.png';
                 }
                 User::socialAuth($login, $email, $img);
             }
