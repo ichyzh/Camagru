@@ -32,6 +32,8 @@
 <div class="footer reset-footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
 <script type="text/javascript">
 
+    var ROOT = location.pathname.split("/")[1];
+
     function resetPwd() {
         var pwd = document.getElementById('pwdres');
         var pwd2 = document.getElementById('pwd2res');
@@ -40,7 +42,7 @@
 
         console.log("NU ZDAROVA");
         var xhr = new XMLHttpRequest();
-        var url = 'http://localhost:8100/camaphp/resetpwd';
+        var url = 'http://localhost:8100/' + ROOT + '/resetpwd';
         var submit = document.getElementById('sbmreset');
         var vars = "submit="+submit.value+"&email="+email+"&pwd="+pwd.value+"&pwd2="+pwd2.value;
         xhr.open("POST", url, true);
@@ -55,7 +57,7 @@
                     var result = JSON.parse(return_data);
                     if (result['ok'] !== undefined) {
                         document.getElementById("status").innerHTML = "NU ZDAROVA";
-                        window.location.href = "http://localhost:8100/camaphp/";
+                        window.location.href = "http://localhost:8100/" + ROOT;
                     }
                 }
             }

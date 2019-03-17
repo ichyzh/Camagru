@@ -62,7 +62,7 @@
                   (1, 'private/images/4.png'),
                   (1, 'private/images/5.png'),
                   (1, 'private/images/6.png')";
-    $dbh->exec($sql);
+    $dbh->query($sql);
 
     $sql = "CREATE TABLE IF NOT EXISTS `comments` (
                 `photo_id` INT(11) NOT NULL,

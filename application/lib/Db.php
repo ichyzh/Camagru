@@ -15,7 +15,6 @@ class Db
             $this->dbh = new PDO($conf['db_dsn'] . $conf['db_name'], $conf['db_user'], $conf['db_password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (\PDOException $e) {
             if ($e->getCode() === 1049) {
-                echo 11111;
                 require ROOT_FOLD . '/application/config/setup.php';
                 header("Location: /" . ROOT);
             }

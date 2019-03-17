@@ -17,7 +17,7 @@ class CameraController extends Controller
 {
     public function actionCamera() {
         $logged['is_logged'] = User::checkCookies($_COOKIE);
-        if ($logged) {
+        if ($logged['is_logged']) {
             $this->view->render('Camera', $logged);
         } else {
             View::errorCode(404);

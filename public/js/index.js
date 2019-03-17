@@ -132,15 +132,13 @@ function ajax_reg(){
                 var return_data = xhr.responseText;
                 var result = JSON.parse(return_data);
                 errors_parse(result);
-
-                //TODO: Check and print errors of input data
-                if (result['login'] !== undefined)
-                    document.getElementById("status").innerHTML = result['login'];
+            }
+            else {
+                location.reload();
             }
         }
     };
     xhr.send(vars);
-    document.getElementById("status").innerHTML = "PRIVET";
 }
 
 function errors_parse(result) {
@@ -152,7 +150,7 @@ function errors_parse(result) {
         email.classList.add("is-invalid");
         document.getElementById("status").innerHTML = result['email'];
     }
-    if (result['d-email'] !== undefined) {
+    if (result['d_email'] !== undefined) {
         email.classList.add("is-invalid");
         document.getElementById("status").innerHTML = result['d_email'];
     }
@@ -160,7 +158,7 @@ function errors_parse(result) {
         login.classList.add("is-invalid");
         document.getElementById("status").innerHTML = result['login'];
     }
-    if (result['d-login'] !== undefined) {
+    if (result['d_login'] !== undefined) {
         login.classList.add("is-invalid");
         document.getElementById("status").innerHTML = result['d_login'];
     }
@@ -174,7 +172,6 @@ function errors_parse(result) {
         pwd.classList.add("is-invalid");
         document.getElementById("status").innerHTML = result['pwd2'];
     }
-
 }
 
 /************************************/
@@ -252,13 +249,12 @@ function ajax_reset() {
         }
     };
     xhr.send(vars);
-    document.getElementById("statusres").innerHTML = "NU ZDAROVA";
 
 }
 
 function fbOauth()
 {
-    var fwind = window.open("https://www.facebook.com/v3.2/dialog/oauth?client_id=370707770156794&display=popup&redirect_uri=http://localhost:8100/" + ROOT + "/fboauth&state={st=log,pr=pas345}&response_type=code&scope=email", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
+    var fwind = window.open("https://www.facebook.com/v3.2/dialog/oauth?client_id=" + FBID + "&display=popup&redirect_uri=http://localhost:8100/" + ROOT + "/fboauth&state={st=log,pr=pas345}&response_type=code&scope=email", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
     var code = fwind.location.href;
     var rel = setInterval(function () {
         if (fwind.closed) {
@@ -286,7 +282,7 @@ function fbOauth()
 
 function glOauth()
 {
-    var gwind = window.open("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me&redirect_uri=http://localhost:8100/" + ROOT + "/googleoauth&response_type=code&client_id=623341989817-1eaol269rh7hh3rdi5h9l7daq3t1a2np.apps.googleusercontent.com&access_type=online", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
+    var gwind = window.open("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me&redirect_uri=http://localhost:8100/" + ROOT + "/googleoauth&response_type=code&client_id=" + GOOGLEID + "&access_type=online", '_blank', 'width=650,height=600,left=200,top=100, toolbar=1,resizable=0');
     var code = gwind.location.href;
     var rel = setInterval(function() {
         if (gwind.closed) {

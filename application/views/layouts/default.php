@@ -59,7 +59,7 @@
 
 <?php echo $content ?>
 
-<div class="footer reset-footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
+<div class="footer reset-footer">© 2019 Copyright: ichyzh<strong><a href="http://localhost:8100/<?php echo ROOT ?>" style="margin-left: 2rem">Camagru</a></strong></div>
 
 </body>
 </html>

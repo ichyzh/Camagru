@@ -190,7 +190,7 @@
                     <?php endforeach; ?>
                     <?php endif; ?>
                     </div>
-                    <?php if(\application\models\User::checkCookies($_COOKIE)): ?>
+                    <?php if($logged['is_logged']): ?>
                     <div class="row ml-3 mb-1 mr-3 mt-1">
                         <div class="row m-0 marpic">
                             <div class="col-2 leftcompic">

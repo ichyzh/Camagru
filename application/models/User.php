@@ -83,7 +83,7 @@ class User
         if ($query->rowCount() > 0) {
             $result = $query->fetch(PDO::FETCH_ASSOC);
             $subject = "Verify your e-mail";
-            $link = "http://localhost:8100/camaphp/verif?email=". $email. "&token=" . $result['active_hash'];
+            $link = "http://localhost:8100/" . ROOT . "/verif?email=". $email. "&token=" . $result['active_hash'];
             $message = "Hi,<br> <br>To verify you e-mail address click on this <a href='$link'>link</a><br>";
             User::sendMail($email, $subject, $message);
         }
@@ -158,7 +158,7 @@ class User
                     ];
                     $req = "UPDATE `users` SET `activated` = :active WHERE `email` = :email";
                     $dbh->dbQuery($req, $params);
-                    header("Location: http://localhost:8100/camaphp/");
+                    header("Location: http://localhost:8100/" . ROOT);
                 }
             }
         }
@@ -222,7 +222,7 @@ class User
         setcookie("hash", "", time()-3600);
         setcookie("login", "", time()-3600);
         session_unset();
-        header("Location: /camaphp/");
+        header("Location:/" . ROOT);
     }
 
     public static function generateHash($length = 6) {
@@ -245,7 +245,7 @@ class User
             $res = $query->fetch(PDO::FETCH_ASSOC);
             if ($res['activated'] === "1") {
                 $token = $res['passwd'];
-                $message = "Hi,<br> <br>To reset your password click on this link http://localhost:8100/camaphp/reset?email=" . $email . "&token=" . $token . "<br>";
+                $message = "Hi,<br> <br>To reset your password click on this link http://localhost:8100/" . ROOT . "/reset?email=" . $email . "&token=" . $token . "<br>";
                 $subject = "Reset Password";
                 User::sendMail($email, $subject, $message);
             }
